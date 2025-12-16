@@ -5,11 +5,21 @@ import { BoxIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMoreIcon, XIcon } f
 import { useClerk, useUser, UserButton } from '@clerk/clerk-react';
 import Logger from './Logger';
 
+import { ExternalLink } from "lucide-react";
+
+
+
+ 
+
 const Navbar = () => {
     const {user} = useUser();
     const {openSignIn, openSignUp, openUserProfile} = useClerk();
     const [menuOpen, setMenuOpen] = React.useState(false);
     const navigate = useNavigate();
+
+      const openProjects = () => {
+    window.open("/projects", "_blank");
+  }
 
   return (
     <nav className='h-20'>
@@ -23,6 +33,13 @@ const Navbar = () => {
                         
                         <Link to={user ? '/messages' : "#"} onClick={() => user ? scrollTo(0, 0) : openSignIn()}> Messages </Link>
                         <Link to={user ? '/my-listings' : "#"} onClick={() =>  user ? scrollTo(0, 0) : openSignIn()}> My Listings </Link>
+                        <Link
+                            onClick={openProjects}
+                            className="flex items-center gap-1 text-blue-600 hover:text-blue-700 hover:underline font-semibold"
+                            >
+                            <ExternalLink size={18} />
+                            Go Project
+                        </Link>
                         <Logger/>
                     </div>
 
@@ -58,10 +75,15 @@ const Navbar = () => {
                         <Link to="/marketplace" onClick={() => setMenuOpen(false)}> MarketPlace </Link>
                         <button onClick={openSignIn}>Messages</button>
                         <button onClick={openSignIn}>My Listings</button>
-                       
-                        <Logger/>
-
                         <button onClick={openSignIn} className=' cursor-pointer px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full'>Login</button>
+                        <button><Logger/></button>
+                        <Link
+                            onClick={openProjects}
+                            className="flex items-center gap-1 text-blue-600 hover:text-blue-700 hover:underline font-semibold"
+                            >
+                            <ExternalLink size={18} />
+                            Go Projects
+                        </Link>
                         <XIcon onClick={() => setMenuOpen(false)} className='absolute size-8 right-6 top-6 text-gray-500 hover:text-gray-700 cursor-pointer'/>
                     </div>
                 </div>

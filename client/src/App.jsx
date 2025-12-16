@@ -8,6 +8,7 @@ import Messages from './pages/Messages'
 import MyOrders from './pages/MyOrders'
 import Loading from './pages/Loading'
 import Navbar from './components/Navbar'
+import Projects from './components/Projects'
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/my-listings" element={<MyListing />} />
         <Route path="/listing/:listingId" element={<ListingDetails />} />
         <Route path="/create-listing" element={<ManageListing />} />
+        <Route path="/projects" element={<Projects/>} />
         <Route path="/edit-listing/:id" element={<ManageListing />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/my-orders" element={<MyOrders />} />
