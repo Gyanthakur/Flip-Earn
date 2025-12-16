@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ListingCard from './ListingCard';
 
 const LatestListing = () => {
-    const {listings} = useSelector((state) => state.listing);
+    const {listings} = useSelector(state => state.listing);
   return (
     <div className='mt-20 mb-8'>
       <Title title="Latest Listing" description="Discover the hottest social profiles available right now." />
