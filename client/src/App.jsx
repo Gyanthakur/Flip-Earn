@@ -10,11 +10,14 @@ import Loading from './pages/Loading'
 import Navbar from './components/Navbar'
 import Projects from './components/Projects'
 
+import { ToastContainer, toast } from 'react-toastify';
+
 const App = () => {
 
   const {pathname} = useLocation();
   return (
     <div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>  
       {!pathname.includes('/admin') && <Navbar />}
       
       <Routes>

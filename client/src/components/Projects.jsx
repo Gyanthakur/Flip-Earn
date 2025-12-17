@@ -196,8 +196,8 @@ export default function Portfolio() {
 										{project.icon}
 									</div>
 
-									{/* Dark Overlay */}
-									<div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/20 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+									{/* Dark Overlay - Desktop Hover */}
+									<div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/20 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex items-end justify-between p-4">
 										<a
 											href={project.demo}
 											target="_blank"
@@ -229,7 +229,7 @@ export default function Portfolio() {
 									</p>
 
 									{/* Tags */}
-									<div className="flex flex-wrap gap-2">
+									<div className="flex flex-wrap gap-2 mb-4">
 										{project.tags.map((tag) => (
 											<span
 												key={tag}
@@ -239,6 +239,28 @@ export default function Portfolio() {
 											</span>
 										))}
 									</div>
+
+									{/* Mobile Action Buttons */}
+									<div className="flex gap-2 md:hidden">
+										<a
+											href={project.demo}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+										>
+											<Globe size={16} className="text-green-500" />
+											Live Demo
+										</a>
+										<a
+											href={project.repo}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900 transition"
+										>
+											<Github size={16} />
+											Code
+										</a>
+									</div>
 								</div>
 							</div>
 						))}
@@ -246,7 +268,7 @@ export default function Portfolio() {
 				</div>
 			</section>
 
-				{/* ================= STATS SECTION ================= */}
+			{/* ================= STATS SECTION ================= */}
 			<section className="relative bg-white py-16 px-4 border-t-2 border-b-2 border-gray-200">
 				<div className="max-w-7xl mx-auto">
 					<div className="grid md:grid-cols-4 gap-8">
@@ -419,7 +441,6 @@ export default function Portfolio() {
 					</div>
 				</div>
 			</section>
-
 			
 			{/* ================= CTA SECTION ================= */}
 			<section className="relative bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-100 py-20 px-4 overflow-hidden border-t-2 border-gray-200">
