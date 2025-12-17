@@ -5,10 +5,12 @@ export default function Portfolio() {
 	const [hoveredProject, setHoveredProject] = useState(null);
 	const [selectedCategory, setSelectedCategory] = useState("all");
 
+	
 	const projects = [
 		{
 			name: "Edemy LMS",
-			description: "Full-featured Learning Management System with modern UI for educators",
+			description:
+			"Edemy LMS is a full-featured Learning Management System designed for educators and learners. It enables course creation, student management, progress tracking, and efficient content delivery with a modern, responsive, and user-friendly interface.",
 			image: "/projectImg/edemylms.png",
 			repo: "https://github.com/Gyanthakur/Edemy-LMS",
 			demo: "https://edemy-lms-gps.vercel.app/",
@@ -18,7 +20,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "Clear Background",
-			description: "AI-powered background removal tool with professional quality results",
+			description:
+			"Clear Background is an AI-powered tool that removes image backgrounds seamlessly. It offers fast processing, high-quality results, and an intuitive interface, making it ideal for designers, creators, and professional visual workflows.",
 			image: "/projectImg/clearbackground.png",
 			repo: "https://github.com/Gyanthakur/ClearBg",
 			demo: "https://clear-bg.vercel.app/",
@@ -28,7 +31,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "Cure Connect",
-			description: "Healthcare platform with appointment scheduling and health tracking",
+			description:
+			"Cure Connect is a healthcare platform that connects patients and medical professionals. It provides features such as appointment scheduling, medical consultations, and health tracking to improve accessibility and streamline healthcare communication.",
 			image: "/projectImg/cureconnect.png",
 			repo: "https://github.com/Gyanthakur/CureConnect",
 			demo: "https://cureconnect-6t81.onrender.com/",
@@ -38,7 +42,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "Image Generator",
-			description: "AI image generator creating high-resolution images from text prompts",
+			description:
+			"Image Generator is an AI-driven application that creates high-resolution images from text prompts. It supports customizable styles and creative flexibility, making it useful for designers, marketers, and content creators.",
 			image: "/projectImg/imagegenerator.png",
 			repo: "https://github.com/Gyanthakur/ImageGenesis",
 			demo: "https://image-genesis.onrender.com/",
@@ -48,7 +53,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "Dev Profiles",
-			description: "Developer portfolio platform showcasing skills and professional presence",
+			description:
+			"Dev Profiles is a developer portfolio and profile management platform that allows users to showcase their skills, projects, and social links, helping them build a strong and professional online presence.",
 			image: "/projectImg/devprofiles.png",
 			repo: "https://github.com/Gyanthakur/Dev_Profiles",
 			demo: "https://dev-profile-smoky.vercel.app",
@@ -58,7 +64,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "Career Mentorship App",
-			description: "Connect learners with professionals for career guidance and knowledge sharing",
+			description:
+			"A next-generation mentorship platform that connects learners with industry professionals worldwide. Experts can share knowledge and grow revenue, while learners explore categories, follow roadmaps, and advance their careers.",
 			image: "/projectImg/careermentorshipapp.png",
 			repo: "https://github.com/Gyanthakur/career-mentorship-app",
 			demo: "https://career-mentorship-app.vercel.app/",
@@ -68,7 +75,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "AgriConnect",
-			description: "Agricultural platform connecting farmers and merchants with role-based features",
+			description:
+			"AgriConnect is a full-stack agricultural platform built to streamline services for farmers and merchants. It features role-based logins with tailored functionalities to improve agricultural trade and communication.",
 			image: "/projectImg/agriconnect.png",
 			repo: "https://github.com/Gyanthakur/AgriConnect",
 			demo: "https://agri-connect-nu.vercel.app/",
@@ -78,7 +86,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "Notes Store",
-			description: "Modern notes management app with seamless create, edit, and share features",
+			description:
+			"Notes Store is a modern notes management application that allows users to create, edit, delete, and share notes seamlessly. Built with modern web technologies, it focuses on productivity and ease of use.",
 			image: "/projectImg/notesstore.png",
 			repo: "https://github.com/Gyanthakur/notes_store",
 			demo: "https://notes-store-app.vercel.app/",
@@ -88,7 +97,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "User Stats",
-			description: "GitHub profile explorer with achievements and repository visualization",
+			description:
+			"User Stats is a GitHub achievements finder that lets users explore GitHub profiles, repositories, and achievements. It provides an engaging way to visualize a developer’s GitHub journey.",
 			image: "/projectImg/userstats.png",
 			repo: "https://github.com/Gyanthakur/User-Stats",
 			demo: "https://user-stats-zeta.vercel.app/",
@@ -98,7 +108,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "My Certificates",
-			description: "Secure certificate management platform with admin authentication",
+			description:
+			"My Certificates is a secure certificate management platform where users can view certificates and admins can authenticate, upload, and manage records efficiently with a responsive user interface.",
 			image: "/projectImg/mycertificates.png",
 			repo: "https://github.com/Gyanthakur/My-Certificates",
 			demo: "https://my-certificates-mu.vercel.app/",
@@ -108,7 +119,8 @@ export default function Portfolio() {
 		},
 		{
 			name: "Git Practice",
-			description: "Interactive CLI for learning Git with instant feedback and explanations",
+			description:
+			"Git Practice is an interactive learning tool designed to help users master Git commands through a guided CLI experience with instant feedback and clear explanations.",
 			image: "/projectImg/gitpractice.png",
 			repo: "https://github.com/Gyanthakur/Git-Practice",
 			demo: "https://git-practice-umber.vercel.app/",
@@ -118,16 +130,17 @@ export default function Portfolio() {
 		},
 		{
 			name: "Chat App",
-			description: "Real-time chat with group conversations, notifications, and media sharing",
+			description:
+			"A real-time chat application supporting one-on-one and group conversations, notifications, and media sharing. It delivers a smooth and interactive communication experience.",
 			image: "/projectImg/chatapp.png",
 			repo: "https://github.com/Gyanthakur/chat-app",
 			demo: "https://chat-app-sable-delta.vercel.app/",
 			tags: ["Socket.io", "React", "Firebase"],
 			icon: "💬",
 			category: "saas"
-		},
-		
+		}
 	];
+
 
 	const categories = ["all", "education", "portfolio", "saas", "tools", "ai", "healthcare"];
 	const filteredProjects = selectedCategory === "all" 

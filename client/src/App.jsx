@@ -18,7 +18,8 @@ const App = () => {
   return (
     <div>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>  
-      {!pathname.includes('/admin') && <Navbar />}
+      {!pathname.includes('/admin') && !pathname.includes('/projects') && <Navbar />}
+     
       
       <Routes>
         <Route path="/" element={<Home />} />
@@ -26,6 +27,8 @@ const App = () => {
         <Route path="/my-listings" element={<MyListing />} />
         <Route path="/listing/:listingId" element={<ListingDetails />} />
         <Route path="/create-listing" element={<ManageListing />} />
+        {/* in the projects route hide navbar */}
+        
         <Route path="/projects" element={<Projects/>} />
         <Route path="/edit-listing/:id" element={<ManageListing />} />
         <Route path="/messages" element={<Messages />} />
