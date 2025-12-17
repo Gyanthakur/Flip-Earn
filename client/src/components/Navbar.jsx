@@ -1,7 +1,7 @@
 import React, { use } from 'react'
 import { assets } from '../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
-import { BoxIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMoreIcon, XIcon } from 'lucide-react';
+import { BoxIcon, ExternalLinkIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMoreIcon, XIcon } from 'lucide-react';
 import { useClerk, useUser, UserButton } from '@clerk/clerk-react';
 import Logger from './Logger';
 
@@ -51,16 +51,19 @@ const Navbar = () => {
                     ) : (
                         <UserButton>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='Marketplace' labelIcon={<GripIcon size={16}/>} onClick={()=> navigate('marketplace')} />
+                                <UserButton.Action label='Marketplace' labelIcon={<GripIcon size={16} className="text-blue-500"/>} onClick={()=> navigate('marketplace')} />
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='Messages' labelIcon={<MessageCircleMoreIcon size={16}/>} onClick={()=> navigate('messages')} />
+                                <UserButton.Action label='Messages' labelIcon={<MessageCircleMoreIcon size={16} className="text-indigo-500"/>} onClick={()=> navigate('messages')} />
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='My Listing' labelIcon={<ListIcon size={16}/>} onClick={()=> navigate('my-listings')} />
+                                <UserButton.Action label='My Listing' labelIcon={<ListIcon size={16} className="text-purple-500"/>} onClick={()=> navigate('my-listings')} />
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='My Orders' labelIcon={<BoxIcon size={16}/>} onClick={()=> navigate('my-orders')} />
+                                <UserButton.Action label='My Orders' labelIcon={<BoxIcon size={16} className="text-orange-500"/>} onClick={()=> navigate('my-orders')} />
+                            </UserButton.MenuItems>
+                            <UserButton.MenuItems>
+                                <UserButton.Action label='Go Projects' labelIcon={<ExternalLinkIcon size={16} className='text-green-500' />} onClick={()=> navigate('projects')} />
                             </UserButton.MenuItems>
                         </UserButton>
                     )}
