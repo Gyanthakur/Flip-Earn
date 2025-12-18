@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ListingCard = ({listing}) => {
     const navigate = useNavigate();
-    const currency = import.meta.env.VITE_CURRENCY || '$';
+    const currency = import.meta.env.VITE_CURRENCY ;
 
   return (
     <div className='relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition'>
