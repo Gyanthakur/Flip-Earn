@@ -11,6 +11,7 @@ import Navbar from './components/Navbar'
 import Projects from './components/Projects'
 
 import { ToastContainer, toast } from 'react-toastify';
+import ChatBox from './components/ChatBox'
 
 const App = () => {
 
@@ -28,13 +29,13 @@ const App = () => {
         <Route path="/listing/:listingId" element={<ListingDetails />} />
         <Route path="/create-listing" element={<ManageListing />} />
         {/* in the projects route hide navbar */}
-        
         <Route path="/projects" element={<Projects/>} />
         <Route path="/edit-listing/:id" element={<ManageListing />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/loading" element={<Loading />} />
       </Routes>
+      <ChatBox/>
     </div>
   )
 }

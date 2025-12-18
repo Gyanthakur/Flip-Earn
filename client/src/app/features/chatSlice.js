@@ -8,7 +8,7 @@ const chatSlice = createSlice({
         chatId: null,
     },
     reducers:{
-        setChat: (state,actioon)=>{
+        setChat: (state,action)=>{
             state.listing = action.payload.listing;
             state.isOpen = true;
             if(action.payload.chatId){
