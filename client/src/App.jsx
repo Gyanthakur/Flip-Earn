@@ -12,12 +12,14 @@ import Projects from './components/Projects'
 
 import { ToastContainer, toast } from 'react-toastify';
 import ChatBox from './components/ChatBox'
+import {Toaster} from 'react-hot-toast'
 
 const App = () => {
 
   const {pathname} = useLocation();
   return (
     <div>
+      <toaster />
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>  
       {!pathname.includes('/admin') && !pathname.includes('/projects') && <Navbar />}
      
