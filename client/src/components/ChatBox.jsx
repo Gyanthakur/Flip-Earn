@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { dummyChats } from '../assets/assets'
-import { Loader2Icon, X } from 'lucide-react'
+import { Loader2Icon, Send, X } from 'lucide-react'
 import { clearChat } from '../app/features/chatSlice'
 import {format} from 'date-fns'
 
@@ -10,10 +10,11 @@ const ChatBox = () => {
     const {listing, isOpen, chatId} = useSelector((state)=> state.chat)
     const dispatch = useDispatch();
     const user = {id: 'user_2'}
+    
 
     const [chat, setChat] = useState(null);
     const [messages, setMessages] = useState([]);
-    const [newMessages, setNewMessages] = useState("");
+    const [newMessage, setNewMessage] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [isSending, setIsSending] = useState(false);
 
@@ -34,13 +35,29 @@ const ChatBox = () => {
             setChat(null)
             setMessages([])
             setIsLoading(true)
-            setNewMessages("")
+            setNewMessage("")
             setIsSending(false)
         }
 
     },[isOpen])
 
+    // ---- for auto scroll -----
+    const messagesEndRef = useRef(null)
+    useEffect(()=>{
+        messagesEndRef.current?.scrollIntoView({behaviour: "smooth"})
+    },[messages.length])
+
+    const handleSendMessage = async(e)=>{
+        e.preventDefault();
+        if(!newMessage.trim() && isSending) return;
+        setMessages([...messages, {id: Date.now(), chatId: chat.id, sender_id: user.id, message: newMessage, createdAt: new Date()}]);
+        setNewMessage("");
+
+    }
+
     if(!isOpen || !listing)return null;
+
+
   return (
     <div className='fixed inset-0 bg-black/70 backdrop:blur bg-opacity-50 z-100 flex items-center justify-center sm:p-4'>
         <div className='bg-white sm:rounded-lg shadow-2xl w-full max-w-2xl h-screen sm:h-[600px] flex flex-col'>
@@ -81,12 +98,49 @@ const ChatBox = () => {
                                     {format(new Date(message.createdAt), "MMM dd 'at' h:mm a")}
                                     </p>
                             </div>
-
                         </div>
                     ))
                 )}
 
+                <div ref={messagesEndRef} />
+
             </div>
+
+            {/* Input Area */}
+            {chat?.listing?.status === "active" ? 
+            (
+                <form onSubmit={handleSendMessage} className='p-4 bg-white border-t border-gray-200 rounded-b-lg'>
+                    <div className='flex items-end space-x-2'>
+
+                        <textarea 
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        onKeyDown={(e)=>{
+                            if(e.key === "Enter" && !e.shiftKey){
+                                e.preventDefault();
+                                handleSendMessage(e);
+                            }
+                        }}
+                        placeholder='Type your message...' 
+                        className='flex-1 resize-none border border-gray-300 rounded-lg px-4 py-2 focus:outline-indigo-500 max-h-32' rows={1} />
+
+                        <button disabled={!newMessage.trim() || isSending} type='submit' className='bg-indigo-600 hover:bg-indigo-700 text-white p-2.5  rounded-lg disabled:opacity-50 transition-colors'>
+                            {
+                                isSending ? 
+                                <Loader2Icon className='w-5 h-5 animate-spin'/>
+                                : <Send className='w-5 h-5'/>
+                            }
+                        </button>
+                    </div>
+                </form>
+            )
+            :
+            (
+                <div className="p-4 bg-white border-t border-gray-200 rounded-b-lg">
+                    <p className='text-sm text-gray-600 text-center'>{chat ? `Listing is ${chat?.listing?.status}` : "Loading chat..."} </p>
+                </div>
+            )
+            }
         </div>
     </div>
   )
