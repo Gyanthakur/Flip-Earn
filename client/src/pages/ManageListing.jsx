@@ -141,10 +141,10 @@ const ManageListing = () => {
         </Section>
 
         {/* Pricing */}
-        <section title="Pricing & Description">
+        <section title="Pricing & Description" className='space-y-4'>
           <InputField label='Asking Price (INR)' type='number' value={formData.price} placeholder='2500' onChange={(v) => handleInputChange('price', v)} required={true} min={0} />
 
-          <TextAreaField label='Description' value={formData.description} onChange={(v) => handleInputChange('description', v)} required={true} />
+          <TextAreaField label='Description' value={formData.description} onChange={(v) => handleInputChange('description', v)} required={true}  />
 
         </section>
 
