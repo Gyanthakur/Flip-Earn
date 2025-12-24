@@ -98,14 +98,14 @@ const ManageListing = () => {
         {/* Besic info */}
         <Section title="Basic Information">
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <InputField label='Listing Title *' value={formData.title} 
+            <InputField label='Listing Title ' value={formData.title} 
             placeholder='e.g., Premium Travel Instagram Account' onChange={(v) => handleInputChange('title', v)} required={true} />
 
-            <SelectField label='Platform *' options={platforms} value={formData.platform} onChange={(v) => handleInputChange('platform', v)} required={true} />
+            <SelectField label='Platform ' options={platforms} value={formData.platform} onChange={(v) => handleInputChange('platform', v)} required={true} />
 
-            <InputField label='Username/Handle *' value={formData.username} placeholder='@username' onChange={(v) => handleInputChange('username', v)} required={true} />
+            <InputField label='Username/Handle ' value={formData.username} placeholder='@username' onChange={(v) => handleInputChange('username', v)} required={true} />
 
-            <SelectField label='Niche/Category *' options={niches} value={formData.niche} onChange={(v) => handleInputChange('niche', v)} required={true} />
+            <SelectField label='Niche/Category ' options={niches} value={formData.niche} onChange={(v) => handleInputChange('niche', v)} required={true} />
 
           </div>
         </Section>
@@ -114,7 +114,7 @@ const ManageListing = () => {
         {/* Metrics */}
         <Section title="Account Metrics">
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-6'>
-            <InputField label='Followers/ Subscribers Count *' type='number' value={formData.followers_count} placeholder='10000' onChange={(v) => handleInputChange('followers_count', v)} required={true} min={0} />
+            <InputField label='Followers/ Subscribers Count ' type='number' value={formData.followers_count} placeholder='10000' onChange={(v) => handleInputChange('followers_count', v)} required={true} min={0} />
 
             <InputField label='Engagement Rate (%) ' type='number' value={formData.engagement_rate} placeholder='4' onChange={(v) => handleInputChange('engagement_rate', v)} min={0} max={100} />
 
@@ -142,9 +142,9 @@ const ManageListing = () => {
 
         {/* Pricing */}
         <section title="Pricing & Description">
-          <InputField label='Asking Price (INR) *' type='number' value={formData.price} placeholder='2500' onChange={(v) => handleInputChange('price', v)} required={true} min={0} />
+          <InputField label='Asking Price (INR)' type='number' value={formData.price} placeholder='2500' onChange={(v) => handleInputChange('price', v)} required={true} min={0} />
 
-          <TextAreaField label='Description *' value={formData.description} onChange={(v) => handleInputChange('description', v)} required={true} />
+          <TextAreaField label='Description' value={formData.description} onChange={(v) => handleInputChange('description', v)} required={true} />
 
         </section>
 
@@ -205,7 +205,10 @@ const Section = ({title, children}) => (
 
 const InputField = ({label, type="text", value, onChange, placeholder, required = false, min= null, max = null})=> (
   <div className='space-y-2'>
-    <label className='block text-sm font-medium text-gray-700 mb-2'>{label}</label>
+    <label className='block text-sm font-medium text-gray-700 mb-2'>
+      {label}
+       {required && <span className="text-red-500 ml-1">*</span>}
+    </label>
     <input
       type={type}
       value={value}
@@ -221,7 +224,10 @@ const InputField = ({label, type="text", value, onChange, placeholder, required 
 
 const SelectField = ({label, options, value, onChange, required = false}) => (
   <div className='space-y-2'>
-    <label className='block text-sm font-medium text-gray-700 mb-2'>{label}</label>
+    <label className='block text-sm font-medium text-gray-700 mb-2'>
+      {label}
+      {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
@@ -245,13 +251,19 @@ const CheckboxField = ({label, checked, onChange, required = false}) => (
         required={required}
         className='size-4'
       />
-      <span className='text-sm text-gray-700'>{label}</span>
+      <span className='text-sm text-gray-700'>
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </span>
     </label>
 )
 
 const TextAreaField = ({label, value, onChange, required = false}) => (
   <div className='space-y-2'>
-    <label className='block text-sm font-medium text-gray-700 mb-2'>{label}</label> 
+    <label className='block text-sm font-medium text-gray-700 mb-2'>
+      {label}
+       {required && <span className="text-red-500 ml-1">*</span>}
+       </label> 
     <textarea
       value={value}
       onChange={(e) => onChange(e.target.value)}
