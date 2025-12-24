@@ -58,7 +58,7 @@ export const addListing = async(req,res) => {
 
 
 // controller for Getting all public listings 
-export const getAllPublickListing = async(req,res) => {
+export const getAllPublicListing = async(req,res) => {
     try {
         const listings = await prisma.listing.findMany({
             where:{status: "active"},
@@ -383,6 +383,15 @@ export const withdrawAmount = async (req, res) => {
         });
 
         return res.status(200).json({message: "Withdrawal request submitted successfully", withdrawal});
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({message: error.code || error.message });
+    }
+}
+
+export const purchaseAccount = async (req, res) => {
+    try {
         
     } catch (error) {
         console.error(error);
