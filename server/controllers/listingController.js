@@ -175,6 +175,7 @@ export const updateListing = async(req,res)=>{
         return res.status(500).json({message: error.code || error.message });
     }
 }
+// controller for toggling listing status between active and inactive
 
 export const toggleStatus = async(req,res) => {
     try {
@@ -203,6 +204,113 @@ export const toggleStatus = async(req,res) => {
 
         return res.status(200).json({message: "Listing status updated successfully", listing});
 
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({message: error.code || error.message });
+    }
+}
+// controller for deleting user listing
+export const deleteUserListing = async(req,res) => {
+    try {
+        const {userId} = await req.auth();
+        const {listingId} = req.params;
+
+        const listing = await prisma.listing.findFirst({
+            where: {id: listingId, ownerId: userId},
+            include: {owner: true},
+        })
+
+        if(!listing){
+            return res.status(404).json({message: "Listing not found"});
+        }
+
+        if(listing.status === "sold"){
+            return res.status(400).json({message: "Sold listing cannot be deleted"});
+        }
+
+
+        // if password has been changed, send new password to the owner
+
+        if(listing.isCredentialChanged){
+            // send email to owner with new password
+        }
+
+        await prisma.listing.update({
+            where: {id: listingId},
+            data: {status: "deleted"}
+        })
+
+        return res.status(200).json({message: "Listing deleted successfully"});
+        
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({message: error.code || error.message });
+    }
+}
+
+// controller for adding credential to listing
+
+export const addCredential = async(req,res) => {
+    try {
+        
+        const {userId} = await req.auth();
+        const {listingId, credential} = req.body;
+
+        if(credential.length === 0 || !listingId){
+            return res.status(400).json({message: "Invalid credential or listingId"});
+        }
+
+        const listing = await prisma.listing.findFirst({
+            where: {id: listingId, ownerId: userId},
+        })
+
+        if(!listing){
+            return res.status(404).json({message: "Listing not found or you are not the owner"});
+        }
+
+        await prisma.credential.create({
+            data: {
+                listingId,
+                originalCredential: credential,
+            }
+        })
+
+        await prisma.listing.update({
+            where: {id: listingId},
+            data: {isCredentialSubmitted: true}
+        })
+
+        return res.status(200).json({message: "Credential added successfully"});
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({message: error.code || error.message });
+    }
+}
+
+
+export const markFeatured = async(req,res) => {
+    try {
+        const {id} = req.params;
+        const {userId} = await req.auth();
+
+        if(req.plan !== "premium"){
+            return res.status(403).json({message: "Only premium users can feature listings or premium plan required"});
+        }
+
+        // unset all other featured listings of the user
+        await prisma.listing.updateMany({
+            where: {ownerId: userId},
+            data: {featured: false},
+        })
+
+        // mark listing as featured
+        await prisma.listing.update({
+            where: {id},
+            data: {featured: true},
+        })
+
+        return res.status(200).json({message: "Listing marked as featured successfully"});
     } catch (error) {
         console.error(error);
         return res.status(500).json({message: error.code || error.message });
