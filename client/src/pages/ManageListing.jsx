@@ -207,7 +207,7 @@ const InputField = ({label, type="text", value, onChange, placeholder, required 
   <div className='space-y-2'>
     <label className='block text-sm font-medium text-gray-700 mb-2'>
       {label}
-       {required && <span className="text-red-500 ml-1">*</span>}
+       {required && <span className="text-red-500 ">*</span>}
     </label>
     <input
       type={type}
@@ -226,7 +226,7 @@ const SelectField = ({label, options, value, onChange, required = false}) => (
   <div className='space-y-2'>
     <label className='block text-sm font-medium text-gray-700 mb-2'>
       {label}
-      {required && <span className="text-red-500 ml-1">*</span>}
+      {required && <span className="text-red-500 ">*</span>}
       </label>
     <select
       value={value}
@@ -253,7 +253,7 @@ const CheckboxField = ({label, checked, onChange, required = false}) => (
       />
       <span className='text-sm text-gray-700'>
         {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && <span className="text-red-500 ">*</span>}
       </span>
     </label>
 )
@@ -262,8 +262,8 @@ const TextAreaField = ({label, value, onChange, required = false}) => (
   <div className='space-y-2'>
     <label className='block text-sm font-medium text-gray-700 mb-2'>
       {label}
-       {required && <span className="text-red-500 ml-1">*</span>}
-       </label> 
+      {required && <span className="text-red-500 ">*</span>}
+    </label> 
     <textarea
       value={value}
       onChange={(e) => onChange(e.target.value)}
