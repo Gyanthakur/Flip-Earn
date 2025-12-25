@@ -1,5 +1,6 @@
 // controller for getting chat (creating if not exist)
 
+import { useId } from "react";
 import prisma from "../configs/prisma.js";
 
 export const getChat = async (req, res) => {
@@ -64,6 +65,74 @@ export const getChat = async (req, res) => {
 
     } catch (error) {
          console.error("Add Listing Error:", error);
+        return res.status(500).json({message: error.code || error.message });
+    }
+}
+
+// controller for Getting all chats for user
+
+export const getAllUserChats = async (req, res) => {
+    try {
+        const {userId} = await req.auth();
+        const chats = await prisma.chat.findMany({
+            where: { OR: [{chatUserId: userId}, {ownerUserId: userId }]},
+            include: { listing: true, ownerUser: true, chatUser: true },
+            orderBy: { updatedAt: 'desc' }
+        })
+
+        if(!chats || chats.length === 0){
+            return res.json({chats: []});
+        }
+
+        return res.json({chats});
+
+    } catch (error) {
+        console.error("Add Listing Error:", error);
+        return res.status(500).json({message: error.code || error.message });
+    }
+}
+
+// controller for sending message in chat
+export const sendChatMessage = async (req, res) => {
+    try {
+        const {userId} = await req.auth();
+        const {chatId, message} = req.body;
+
+        const chat = await prisma.chat.findFirst({
+            where: {
+                AND: [{id: chatId}, { OR: [{chatUserId: userId}, {ownerUserId: userId }]}]
+            },
+            include: {listing: true, ownerUser: true, chatUser: true}
+        })
+
+        if(!chat){
+            return res.status(404).json({message: "chat not found"})
+        } else if(chat.listing.status !== "active")
+        {
+            return res.status(400).json({message: `Listing is ${chat.listing.status}`});
+        }
+
+        const newMessage = {
+            message,
+            sender_id: useId,
+            chatId,
+            createdAt: new Date()
+        }
+
+        await prisma.message.create({
+            data: newMessage
+        })
+
+        res.json({message: "Message Sent", newMessage})
+
+        await prisma.chat.update({
+            where: {id: chatId},
+            data: {lastMessage: newMessage.message, isLastMessageRead: false, lastMessageSenderId: userId}
+        })
+
+        
+    } catch (error) {
+        console.error("Add Listing Error:", error);
         return res.status(500).json({message: error.code || error.message });
     }
 }
