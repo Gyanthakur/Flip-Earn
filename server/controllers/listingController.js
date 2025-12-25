@@ -19,9 +19,9 @@ export const addListing = async(req,res) => {
         }
         const accountDetails = JSON.parse(req.body.accountDetails);
 
-        accountDetails.followers_count = parseInt(accountDetails.followers_count);
+        accountDetails.followers_count = parseFloat(accountDetails.followers_count);
         accountDetails.engagement_rate = parseFloat(accountDetails.engagement_rate);
-        accountDetails.monthely_views = parseFloat(accountDetails.monthely_views);
+        accountDetails.monthly_views = parseFloat(accountDetails.monthly_views);
         accountDetails.price = parseFloat(accountDetails.price);
         accountDetails.platform = accountDetails.platform.toLowerCase();
         accountDetails.niche = accountDetails.niche.toLowerCase();
@@ -116,15 +116,15 @@ export const updateListing = async(req,res)=>{
         const {userId} = await req.auth();
         const accountDetails = JSON.parse(req.body.accountDetails);
 
-        if(req.files.length + accountDetails.existingImages.length > 5){
+        if(req.files.length + accountDetails.images.length > 5){
             return res.status(400).json({message: "You can upload maximum 5 images"});
         }
 
 
 
-        accountDetails.followers_count = parseInt(accountDetails.followers_count);
+        accountDetails.followers_count = parseFloat(accountDetails.followers_count);
         accountDetails.engagement_rate = parseFloat(accountDetails.engagement_rate);
-        accountDetails.monthely_views = parseFloat(accountDetails.monthely_views);
+        accountDetails.monthly_views = parseFloat(accountDetails.monthly_views);
         accountDetails.price = parseFloat(accountDetails.price);
         accountDetails.platform = accountDetails.platform.toLowerCase();
         accountDetails.niche = accountDetails.niche.toLowerCase();
@@ -148,7 +148,7 @@ export const updateListing = async(req,res)=>{
              const uploadImages = req.files.map(async (file)=>{
             const response = await imagekit.files.upload({
                 file: fs.createReadStream(file.path),
-                fileName: `${Date.now()}-${file.originalname}.png`,
+                fileName: `${Date.now()}.png`,
                 folder: "flip-earn",
                 transformation: {pre: "w-1280, h-auto"}
             });
@@ -163,7 +163,7 @@ export const updateListing = async(req,res)=>{
             data: {
                 ownerId: userId,
                 ...accountDetails,
-                images: [...accountDetails.existingImages, ...images]
+                images: [...accountDetails.images, ...images]
             }
         })
         return res.status(200).json({message: "Account updated successfully", listing});

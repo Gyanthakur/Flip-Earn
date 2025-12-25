@@ -1,14 +1,24 @@
+import { useAuth } from '@clerk/clerk-react';
 import { Loader2Icon, Upload, X } from 'lucide-react';
 import React, { Children, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import api from '../configs/axios';
+import { getAllPublicListing, getAllUserListing } from '../app/features/listingSlice';
+import axios from 'axios';
 
 const ManageListing = () => {
+
+  const baseURL = import.meta.env.VITE_BASEURL;
 
   const {id} = useParams();
   const navigate = useNavigate();
   const {userListings} = useSelector((state)=>state.listing)
+
+  const {getToken} = useAuth();
+  const dispatch = useDispatch();
+
 
   const [loadingListing, setLoadingListing] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -29,9 +39,44 @@ const ManageListing = () => {
     images: [],
   })
 
-  const platforms = ["Instagram", "YouTube", "TikTok", "Twitter", "Facebook", "Twitch", "LinkedIn", "Pinterest", "Snapchat", "Reddit", "Clubhouse", "Other"];
+  const platforms = [
+  "instagram",
+  "youtube",
+  "tiktok",
+  "twitter",
+  "facebook",
+  "twitch",
+  "linkedin",
+  "pinterest",
+  "snapchat",
+  "reddit",
+  "clubhouse",
+  "other"
+];
 
-  const niches = ["Fashion", "Beauty", "Fitness", "Travel", "Food", "Technology", "Gaming", "Lifestyle", "Health", "Finance", "Education", "Entertainment", "Music", "Sports", "Photography", "Art", "DIY", "Parenting", "Business", "Other"];
+const niches = [
+  "fashion",
+  "beauty",
+  "fitness",
+  "travel",
+  "food",
+  "technology",
+  "gaming",
+  "lifestyle",
+  "health",
+  "finance",
+  "education",
+  "entertainment",
+  "music",
+  "sports",
+  "photography",
+  "art",
+  "diy",
+  "parenting",
+  "business",
+  "other"
+];
+
 
   const ageRanges = ["13-17 years", "18-24 years", "25-34 years", "35-44 years", "45-54 years", "55-64 years", "65+ years", "Mixed Ages"];
 
@@ -71,6 +116,56 @@ const ManageListing = () => {
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
+    toast.loading("Saving...")
+    const dataCopy = structuredClone(formData)
+    try {
+      if(isEditing){
+        dataCopy.images = formData.images.filter((image)=>typeof image === "string")
+      
+        const formDataInstance = new FormData();
+        formDataInstance.append('accountDetails', JSON.stringify(dataCopy))
+
+        formData.images.filter((image) => typeof image !== 'string').forEach((image)=>{formDataInstance.append('images', image)} )
+
+        const token = await getToken();
+
+        // const {data} = await axios.put(`http://localhost:3000/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
+        const {data} = await axios.put(`${baseURL}/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
+
+        toast.dismissAll();
+        toast.success(data.message)
+        dispatch(getAllUserListing({getToken}))
+        dispatch(getAllPublicListing())
+        navigate('/my-listings')
+      }else{
+        delete dataCopy.images;
+
+        const formDataInstance = new FormData();
+
+        formDataInstance.append('accountDetails', JSON.stringify(dataCopy));
+        formData.images.forEach((image)=>{
+          formDataInstance.append('images', image)
+        })
+
+        const token = await getToken();
+        const {data} = await axios.post(`${baseURL}/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
+        console.log("url: " );
+        
+        console.log("data:", data);
+        
+
+        toast.dismissAll();
+        toast.success(data.message)
+        dispatch(getAllUserListing({getToken}))
+        dispatch(getAllPublicListing())
+        navigate('/my-listings')
+
+
+      }
+    } catch (error) {
+      toast.dismissAll();
+      toast.error(error?.response?.data?.message || error.message)
+    }
   }
 
   if(loadingListing)
