@@ -5,3 +5,5 @@ const api = axios.create({
 })
 
 export default api;
+
+export const backendUrl = import.meta.env.VITE_BASEURL;

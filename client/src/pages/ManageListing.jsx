@@ -4,13 +4,13 @@ import React, { Children, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import api from '../configs/axios';
+import api, { backendUrl } from '../configs/axios';
 import { getAllPublicListing, getAllUserListing } from '../app/features/listingSlice';
 import axios from 'axios';
 
 const ManageListing = () => {
 
-  const baseURL = import.meta.env.VITE_BASEURL;
+ 
 
   const {id} = useParams();
   const navigate = useNavigate();
@@ -130,7 +130,7 @@ const niches = [
         const token = await getToken();
 
         // const {data} = await axios.put(`http://localhost:3000/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
-        const {data} = await axios.put(`${baseURL}/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
+        const {data} = await axios.put(`${backendUrl}/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
 
         toast.dismissAll();
         toast.success(data.message)
@@ -148,7 +148,7 @@ const niches = [
         })
 
         const token = await getToken();
-        const {data} = await axios.post(`${baseURL}/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
+        const {data} = await axios.post(`${backendUrl}/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
         console.log("url: " );
         
         console.log("data:", data);
@@ -164,7 +164,7 @@ const niches = [
       }
     } catch (error) {
       toast.dismissAll();
-      toast.error(error?.response?.data?.message || error.message)
+      toast.error(error?.response?.data?.message || error?.message)
     }
   }
 

@@ -1,6 +1,6 @@
 // controller for getting chat (creating if not exist)
 
-import { useId } from "react";
+
 import prisma from "../configs/prisma.js";
 
 export const getChat = async (req, res) => {
@@ -56,7 +56,7 @@ export const getChat = async (req, res) => {
 
         const chatWithData = await prisma.chat.findUnique({
             where: {id: newChat.id},
-            include: { listing: true, ownerUser: true, chatUser: true, messages: true }
+            include: { listing: true, ownerUser: true, chatUser: true }
         })
 
         return res.json({chat: chatWithData});
@@ -114,7 +114,7 @@ export const sendChatMessage = async (req, res) => {
 
         const newMessage = {
             message,
-            sender_id: useId,
+            sender_id: userId,
             chatId,
             createdAt: new Date()
         }

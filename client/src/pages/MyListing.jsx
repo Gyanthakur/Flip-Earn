@@ -10,9 +10,9 @@ import { useAuth } from '@clerk/clerk-react'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import { getAllPublicListing, getAllUserListing } from '../app/features/listingSlice'
+import { backendUrl } from '../configs/axios'
 
 const MyListing = () => {
-  const baseURL = import.meta.env.VITE_BASEURL;
 
   const {userListings, balance} = useSelector((state)=>state.listing)
   const currency = import.meta.env.VITE_CURRENCY;
@@ -71,7 +71,7 @@ const MyListing = () => {
     try {
       toast.loading('Updating listing status...');
       const token = await getToken();
-      const data = await axios.put(`${baseURL}/api/listing/${listingId}/status`, {}, {headers: {Authorization: `Bearer ${token}`}})
+      const data = await axios.put(`${backendUrl}/api/listing/${listingId}/status`, {}, {headers: {Authorization: `Bearer ${token}`}})
       dispatch(getAllUserListing({getToken}))
       dispatch(getAllPublicListing())
       toast.dismissAll();
@@ -87,7 +87,7 @@ const MyListing = () => {
       if(!confirm) return;
       toast.loading('Deleting listing...');
       const token = await getToken();
-      const data = await axios.delete(`${baseURL}/api/listing/${listingId}`, {headers: {Authorization: `Bearer ${token}`}})
+      const data = await axios.delete(`${backendUrl}/api/listing/${listingId}`, {headers: {Authorization: `Bearer ${token}`}})
       dispatch(getAllUserListing({getToken}))
       dispatch(getAllPublicListing())
       toast.dismissAll();
@@ -101,7 +101,7 @@ const MyListing = () => {
      try {
       toast.loading('Featuring listing...');
       const token = await getToken();
-      const data = await axios.put(`${baseURL}/api/listing/featured/${listingId}`, {}, {headers: {Authorization: `Bearer ${token}`}})
+      const data = await axios.put(`${backendUrl}/api/listing/featured/${listingId}`, {}, {headers: {Authorization: `Bearer ${token}`}})
       dispatch(getAllUserListing({getToken}))
       dispatch(getAllPublicListing())
       toast.dismissAll();

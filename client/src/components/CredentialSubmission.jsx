@@ -1,15 +1,14 @@
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth } from '@clerk/clerk-react'
 import axios from 'axios';
 import { CirclePlus, X } from 'lucide-react'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux';
 import { getAllUserListing } from '../app/features/listingSlice';
+import { backendUrl } from '../configs/axios';
 
 const CredentialSubmission = ({onClose, listing}) => {
-
-    const baseURL = import.meta.env.VITE_BASEURL;
-    const {getToken} = useAuth();
+    const {getToken} = useAuth()
     const dispatch = useDispatch();
 
     const [newField, setNewField] = useState("")
@@ -46,8 +45,8 @@ const CredentialSubmission = ({onClose, listing}) => {
 
                 if(!confirm)return;
 
-                const token = getToken();
-                const {data} = await axios.post(`${baseURL}/api/listing/add-credential`, {credential, listingId: listing.id}, {headers: {Authorization: `Bearer ${token}`}})
+                const token = await getToken();
+                const {data} = await axios.post(`${backendUrl}/api/listing/add-credential`, {credential, listingId: listing.id}, {headers: {Authorization: `Bearer ${token}`}})
                 toast.success(data.message)
                 dispatch(getAllUserListing({getToken}));
                 onClose();
