@@ -6,6 +6,7 @@ import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js";
 import listingRouter from "./routes/listingRoutes.js";
 import chatRouter from "./routes/chatRoutes.js";
+import adminRouter from "./routes/adminRoutes.js";
 
 const app = express();
 
@@ -19,8 +20,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
-app.use("/api/listing", listingRouter)
-app.use("/api/chat", chatRouter)
+app.use("/api/listing", listingRouter);
+app.use("/api/chat", chatRouter);
+app.use("/api/admin", adminRouter);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
