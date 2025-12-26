@@ -3,6 +3,7 @@
 import imagekit from "../configs/imageKit.js";
 import prisma from "../configs/prisma.js";
 import fs from "fs";
+import Stripe from "stripe";
 
 
 export const addListing = async(req,res) => {
@@ -392,7 +393,59 @@ export const withdrawAmount = async (req, res) => {
 
 export const purchaseAccount = async (req, res) => {
     try {
+        const { userId } = await req.auth();
+        const {listingId} = req.params;
+        const {origin} = req.headers;
+
+        const listing = await prisma.listing.findFirst({
+            where: {id: listingId, status: 'active'}
+        })
+
+        if(!listing){
+            return res.status(404).json({message: "Listing not found or not active"})
+        }
         
+        if(listing.ownerId === userId){
+            return res.status(400).json({message: "You can not purchase your own listing"})
+        }
+
+        const transaction = await prisma.transaction.create({
+            data: {
+                listingId,
+                ownerId: listing.ownerId,
+                userId,
+                amount: listing.price
+            }
+        })
+
+        const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY)
+
+        const session = await stripeInstance.checkout.sessions.create({
+        success_url: `${origin}/loading/my-orders`,
+        cancel_url: `${origin}/loading/marketplace`,
+        line_items: [
+            {
+                price_data: {
+                    currency: "INR",
+                    product_data: {
+                        name: `Purchasing Account @${listing.username} of ${listing.platform}`
+                    },
+                    unit_amount: Math.floor(transaction.amount) * 100,
+                }, quantity: 1
+            },
+        ],
+        mode: 'payment',
+        metadata: {
+            transactionId: transaction.id,
+            appId: "flipearn",
+        },
+        expires_at: Math.floor(Date.now() / 1000) + 30 * 60, // expires in 30 minutes
+        });
+
+        return res.json({paymentLink: session.url})
+
+
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({message: error.code || error.message });
