@@ -218,7 +218,7 @@ export const getAllTransacrtion = async (req, res) => {
 		//    get customer details for each transaction and add it to the transaction object
 
 		const customers = await prisma.user.findMany({
-			where: { id: { in: transaction.map((t) => t.userId) } },
+			where: { id: { in: transactions.map((t) => t.userId) } },
 			select: { id: true, email: true, name: true, image: true },
 		});
 

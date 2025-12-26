@@ -7,6 +7,7 @@ import { dummyListings } from '../../assets/assets';
 import { useAuth } from '@clerk/clerk-react';
 import axios from 'axios';
 import { backendUrl } from '../../configs/axios';
+import toast from 'react-hot-toast';
 
 const CredentialVerify = () => {
 
