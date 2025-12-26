@@ -22,7 +22,7 @@ app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/listing", listingRouter)
 app.use("/api/chat", chatRouter)
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Flip-Earn Server is running on port ${PORT}`);
 });
