@@ -2,6 +2,7 @@ import { request, response } from "express";
 import { err } from "inngest/types";
 import Stripe from "stripe";
 import prisma from "../configs/prisma.js";
+import { inngest } from "../inngest/index.js";
 
 export const stripeWebhook = async(request, response) => {
     const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -39,6 +40,15 @@ export const stripeWebhook = async(request, response) => {
                 })
 
                 // send new credential to purchaser or buyer using the email address
+
+                await inngest.send({
+                    name: "app/purchase",
+                    data: {transaction}
+                })
+
+
+
+                // mark listing as sold
 
                 await prisma.listing.update({
                     where: {id: transaction.listingId},
