@@ -189,7 +189,7 @@ export const changeCredential = async (req, res) => {
 		const { newCredential, credentialId } = req.body;
 
 		await prisma.credential.update({
-			where: { id: listingId },
+			where: { id: credentialId },
 			data: { updatedCredential: newCredential },
 		});
 

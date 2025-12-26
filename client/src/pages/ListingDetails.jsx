@@ -160,7 +160,7 @@ const ListingDetails = () => {
               </div>
               <div>
                 <Eye className='mx-auto text-gray-400 w-5 h-5 mb-1'/>
-                <p className='font-semibold text-gray-800'> {listing.monthly_views.toLocaleString()}% </p>
+                <p className='font-semibold text-gray-800'> {listing.monthly_views?.toLocaleString()}% </p>
                 <p className='text-xs text-gray-500'>Monthly Views</p>
               </div>
               <div>
