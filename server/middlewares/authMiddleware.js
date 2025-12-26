@@ -21,7 +21,7 @@ export const protect = async (req, res, next) => {
 
 export const protectAdmin = async (req, res, next) => {
     try {
-        const {user} = await clerkClient.users.getUser(await req.auth().userId)
+        const user = await clerkClient.users.getUser(await req.auth().userId)
 
        const isAdmin = process.env.ADMIN_EMAIL.split(",").includes(user.emailAddresses[0].emailAddress);
        if(!isAdmin){

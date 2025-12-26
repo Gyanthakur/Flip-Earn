@@ -51,33 +51,33 @@ const FilterSidebar = ({showFilterPhone,setShowFilterPhone,filters, setFilters})
     }
 
     const platform = [
-        {value: 'instagram', label: ' Instagram'},
         {value: 'youtube', label: 'YouTube'},
+        {value: 'instagram', label: ' Instagram'},
         {value: 'tiktok', label: 'TikTok'},
-        {value: 'twitter', label: 'Twitter'},
-        {value: 'telegram', label: 'Telegram'},
-        {value: 'twitch', label: 'Twitch'},
         {value: 'facebook', label: 'Facebook'},
+        {value: 'twitter', label: 'Twitter'},
+        {value: 'linkedin', label: 'Linkedin'},
+        {value: 'twitch', label: 'Twitch'},
+        {value: 'discord', label: 'Discord'},
     ]
 
     const niches = [
         {value: 'lifestyle', label: 'Lifestyle'},
         {value: 'fitness', label: 'Fitness'},
-        {value: 'fashion', label: 'Fashion'},
-        {value: 'gaming', label: 'Gaming'},
-        {value: 'travel', label: 'Travel'},
         {value: 'food', label: 'Food'},
+        {value: 'travel', label: 'Travel'},
+        {value: 'tech', label: 'Technology'},
+        {value: 'gaming', label: 'Gaming'},
+        {value: 'fashion', label: 'Fashion'},
+        {value: 'beauty', label: 'Beauty'},
+        {value: 'business', label: 'Business'},
         {value: 'education', label: 'Education'},
         {value: 'music', label: 'Music'},
-        {value: 'comedy', label: 'Comedy'},
-        {value: 'technology', label: 'Technology'},
-        {value: 'health', label: 'Health'},
-        {value: 'business', label: 'Business'},
-        {value: 'photography', label: 'Photography'},
         {value: 'art', label: 'Art'},
         {value: 'sports', label: 'Sports'},
-        {value: 'news', label: 'News'},
-        {value: 'politics', label: 'Politics'}
+        {value: 'health', label: 'Health'},
+        {value: 'finance', label: 'Finance'},
+        
     ]
 
   return (

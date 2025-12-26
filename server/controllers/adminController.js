@@ -14,24 +14,24 @@ export const isAdmin = async (req, res) => {
 // Controller for getting dashboard data
 export const getDashboard = async (req, res) => {
 	try {
-		const totalListing = await prisma.listing.count({});
-		const transaction = await prisma.transaction.findMany({
+		const totalListings = await prisma.listing.count({});
+		const transactions = await prisma.transaction.findMany({
 			where: { isPaid: true },
 			select: { amount: true },
 		});
 
-		const totalRevenue = transaction.reduce(
+		const totalRevenue = transactions.reduce(
 			(total, transaction) => total + transaction.amount,
 			0
 		);
 
-		const activeListing = prisma.listing.count({
+		const activeListings = await prisma.listing.count({
 			where: { status: "active" },
 		});
 
 		const totalUser = await prisma.user.count({});
 
-		const recentListing = await prisma.listing.findMany({
+		const recentListings = await prisma.listing.findMany({
 			orderBy: { createdAt: "desc" },
 			take: 5,
 			include: { owner: true },
@@ -39,11 +39,11 @@ export const getDashboard = async (req, res) => {
 
 		return res.json({
 			dashboardData: {
-				totalListing,
+				totalListings,
 				totalRevenue,
-				activeListing,
+				activeListings,
 				totalUser,
-				recentListing,
+				recentListings,
 			},
 		});
 	} catch (error) {

@@ -23,59 +23,57 @@ const ManageListing = () => {
   const [loadingListing, setLoadingListing] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
-    platform: "",
-    username: "",
-    followers_count: "",
-    engagement_rate: "",
-    monthly_views: "",
-    niche: "",
-    price: "",
-    description: "",
+    title: '',
+    platform: '',
+    username: '',
+    followers_count: '',
+    engagement_rate: '',
+    monthly_views: '',
+    niche: '',
+    price: '',
+    description: '',
     verified: false,
     monetized: false,
-    country: "",
-    age_range: "",
+    country: '',
+    age_range: '',
     images: [],
   })
 
-  const platforms = [
-  "instagram",
-  "youtube",
-  "tiktok",
-  "twitter",
-  "facebook",
-  "twitch",
-  "linkedin",
-  "pinterest",
-  "snapchat",
-  "reddit",
-  "clubhouse",
-  "other"
+ const platforms = [
+  'youtube',
+  'instagram',
+  'tiktok',
+  'facebook',
+  'twitter',
+  'linkedin',
+  'pinterest',
+  'snapchat',
+  'twitch',
+  'reddit',
+  'discord',
 ];
 
+
 const niches = [
-  "fashion",
-  "beauty",
-  "fitness",
-  "travel",
-  "food",
-  "technology",
-  "gaming",
-  "lifestyle",
-  "health",
-  "finance",
-  "education",
-  "entertainment",
-  "music",
-  "sports",
-  "photography",
-  "art",
-  "diy",
-  "parenting",
-  "business",
-  "other"
+  'lifestyle',
+  'fitness',
+  'food',
+  'travel',
+  'tech',
+  'gaming',
+  'fashion',
+  'beauty',
+  'business',
+  'education',
+  'entertainment',
+  'music',
+  'art',
+  'sports',
+  'health',
+  'finance',
+  'other'
 ];
+
 
 
   const ageRanges = ["13-17 years", "18-24 years", "25-34 years", "35-44 years", "45-54 years", "55-64 years", "65+ years", "Mixed Ages"];
