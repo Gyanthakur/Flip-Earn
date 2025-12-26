@@ -1,5 +1,6 @@
 import { Inngest } from "inngest";
 import prisma from "../configs/prisma.js";
+import sendEmail from "../configs/nodemailer.js";
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "profile-marketplace" });
@@ -90,11 +91,88 @@ const syncUserUpdation = inngest.createFunction(
         }
     })
   },
+);
+
+
+// Inngest function to send purchase email to the customer 
+const senderPurchseEmail = inngest.createFunction(
+    {id: 'send-purchase-email'},
+    {event: "app/purchase"},
+    async({event})=>{
+        const {transaction} = event.data;
+        const customer = await prisma.user.findFirst({
+            where: {id: transaction.userId}
+        })
+        const listing = await prisma.listing.findFirst({
+            where: {id: transaction.listingId}
+        })
+        const credential = await prisma.credential.findFirst({
+            where: {listingId: transaction.listingId}
+        })
+
+        await sendEmail({
+            to:customer.email,
+            subject: "Your Credential for the account you purchased",
+            html: `
+            <h2>Thank you for purchasing acoount @${listing.username} of ${listing.platform} platform </h2>
+            <p>Here are your credentials for thre listing you purchased.</p>
+            <h3>New Credentials</h3>
+            <div>
+            ${credential.updatedCredential.map((cred)=> `<p>${cred.name} : ${cred.value} </p>`).join("")}
+            </div>
+            <p>If you have any question, please contact us at <a href="mailto:gps.96169@gmail.com">support@flipearn.com</a></p>
+            `
+        })
+         
+    }
+)
+
+// inngest function to send new credential for deleted listings
+const sendNewCredentials = inngest.createFunction(
+    {id: 'send-new-credentials'},
+    {event: "app/listing-deleted"},
+    async({event}) => {
+        const {listing, listingId} = event.data;
+
+        const newCredential = await prisma.credential.findFirst({
+            where: {listingId}
+        })
+        if(newCredential){
+            await sendEmail({
+                to: listing.owner.email,
+                subject: "New Credentials for your deleted listing",
+                html: `
+
+                h2
+                <h2>Your new credentials for your deleted listing :</h2>
+                title : ${listing.title}
+                <br />
+                username : ${listing.username}
+                <br />
+                platfoem : ${listing.platform}
+                <br />
+                <h3>new credentials</h3>
+                <div>
+                ${newCredential.updatedCredential.map((cred)=> `<p>${cred.name} : ${cred.value} </p>`).join("")}
+                </div>
+
+                <h3>Old Credentials</h3>
+                 <div>
+                ${newCredential.originalCredential.map((cred)=> `<p>${cred.name} : ${cred.value} </p>`).join("")}
+                </div>
+
+                 <p>If you have any question, please contact us at <a href="mailto:gps.96169@gmail.com">support@flipearn.com</a></p>
+                `
+            })
+        }
+    }
 )
 
 // Create an empty array where we'll export future Inngest functions
 export const functions = [
     syncUserCreation,
     syncUserDeletion,
-    syncUserUpdation
+    syncUserUpdation,
+    senderPurchseEmail,
+    sendNewCredentials
 ];
