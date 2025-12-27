@@ -427,11 +427,11 @@ export const purchaseAccount = async (req, res) => {
 
         const session = await stripeInstance.checkout.sessions.create({
         success_url: `${origin}/loading/my-orders`,
-        cancel_url: `${origin}/loading/marketplace`,
+        cancel_url: `${origin}/marketplace`,
         line_items: [
             {
                 price_data: {
-                    currency: "INR",
+                    currency: "usd",
                     product_data: {
                         name: `Purchasing Account @${listing.username} of ${listing.platform}`
                     },
