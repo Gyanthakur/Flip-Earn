@@ -24,6 +24,7 @@ import { useAuth, useUser } from '@clerk/clerk-react'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import {getAllPublicListing, getAllUserListing } from './app/features/listingSlice'
+import Footer from './components/Footer'
 
 const App = () => {
 
@@ -46,7 +47,7 @@ const App = () => {
 
 
   return (
-    <div>
+    <div className='min-h-screen flex flex-col'>
       <Toaster />
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>  
       {!pathname.includes('/admin') && !pathname.includes('/projects') && <Navbar />}
@@ -74,6 +75,8 @@ const App = () => {
 
         </Route>
       </Routes>
+      {/* {!pathname.includes('/admin') && !pathname.includes('/marketplace') && <Footer/>} */}
+      {!pathname.includes('/admin') && <Footer/>}
       <ChatBox/>
     </div>
   )
