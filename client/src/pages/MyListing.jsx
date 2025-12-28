@@ -191,17 +191,9 @@ const MyListing = () => {
 
 
 
-                          <div className='relative group'>
-                            {/* <LockIcon size={14}/> */}
-                            <button
-                              type="button"
-                              onClick={() => setOpen(!open)}
-                              className="sm:pointer-events-none"
-                            >
-                              <LockIcon size={14}/>
-                            </button>
-                            {/* <div  className='invisible group-hover:visible absolute right-0 top-0 pt-4.5 z-10'> */}
-                            <div className={`absolute right-0 top-0 pt-4.5 z-10 group-hover:visible ${open ? "visible" : ""}`}>
+                          {/* <div className='relative group'>
+                            <LockIcon size={14}/>
+                            <div  className='invisible group-hover:visible absolute right-0 top-0 pt-4.5 z-10'>
                               <div className='bg-white text-gray-600 text-xs rounded border border-gray-200 p-2 px-3'>
                                 {!listing.isCredentialSubmitted && (
                                   <>
@@ -231,6 +223,63 @@ const MyListing = () => {
 
                             </div>
 
+                          </div> */}
+
+                          <div className="relative group">
+                            {/* Lock icon */}
+                            <button
+                              type="button"
+                              onClick={() => setOpen((prev) => !prev)}
+                              className="sm:pointer-events-none"
+                            >
+                              <LockIcon size={14} />
+                            </button>
+
+                            {/* Dropdown */}
+                            <div
+                              className={`
+                                absolute right-0 top-0 pt-4.5 z-10
+                                invisible group-hover:visible
+                                ${open ? "visible" : ""}
+                              `}
+                            >
+                              <div className="bg-white text-gray-600 text-xs rounded border border-gray-200 p-2 px-3">
+                                {!listing.isCredentialSubmitted && (
+                                  <>
+                                    <button
+                                      onClick={() => setShowCredentialSubmission(listing)}
+                                      className="flex items-center gap-2 text-nowrap"
+                                    >
+                                      Add Credentials
+                                    </button>
+                                    <hr className="border-gray-200 my-2" />
+                                  </>
+                                )}
+
+                                <button className="text-nowrap">
+                                  Status:{" "}
+                                  <span
+                                    className={
+                                      listing.isCredentialSubmitted
+                                        ? listing.isCredentialVerified
+                                          ? listing.isCredentialChanged
+                                            ? "text-green-600"
+                                            : "text-indigo-600"
+                                          : "text-pink-600"
+                                        : "text-red-600"
+                                    }
+                                  >
+                                    {listing.isCredentialSubmitted
+                                      ? listing.isCredentialVerified
+                                        ? listing.isCredentialChanged
+                                          ? "Changed"
+                                          : "Verified"
+                                        : "Submitted"
+                                      : "Not Submitted"}
+                                  </span>
+                                </button>
+                              </div>
+                            </div>
                           </div>
 
 
