@@ -12,7 +12,6 @@ const Home = () => {
       <LatestListing/>
       <Plans/>
       <CTA/>
-      <Footer/>
     </div>
   )
 }

@@ -25,6 +25,7 @@ import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import {getAllPublicListing, getAllUserListing } from './app/features/listingSlice'
 import Footer from './components/Footer'
+import AdminFooter from './components/admin/AdminFooter'
 
 const App = () => {
 
@@ -75,8 +76,8 @@ const App = () => {
 
         </Route>
       </Routes>
-      {/* {!pathname.includes('/admin') && !pathname.includes('/marketplace') && <Footer/>} */}
       {!pathname.includes('/admin') && <Footer/>}
+      {pathname.includes('/admin') && <AdminFooter/>}
       <ChatBox/>
     </div>
   )
