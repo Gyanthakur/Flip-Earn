@@ -21,6 +21,7 @@ const CredentialVerify = () => {
         try {
             const token = await getToken();
             const {data} = await axios.get(`${backendUrl}/api/admin/unverified-listings`, {headers: {Authorization: `Bearer ${token}`}})
+            console.log("All unverified credentials: ", data.listings);
             setListings(data.listings);
             setLoading(false)
         } catch (error) {

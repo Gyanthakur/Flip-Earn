@@ -23,6 +23,7 @@ const MyListing = () => {
 
   const [showCredentialSubmission, setShowCredentialSubmission] = useState(null)
   const [showWithdrawal, setShowWithdrawal] = useState(null)
+  const [open, setOpen] = useState(false);
 
   const totalValue = userListings.reduce((sum, listing)=> sum + (listing.price || 0), 0);
   const activeListings = userListings.filter((listing)=> listing.status === 'active').length;
@@ -186,9 +187,21 @@ const MyListing = () => {
                       <div className='flex justify-between items-start'>
                         <h3 className='text-lg font-semibold text-gray-800'>{listing.title}</h3>
                         <div className='flex items-center gap-2'>
+
+
+
+
                           <div className='relative group'>
-                            <LockIcon size={14}/>
-                            <div className='invisible group-hover:visible absolute right-0 top-0 pt-4.5 z-10'>
+                            {/* <LockIcon size={14}/> */}
+                            <button
+                              type="button"
+                              onClick={() => setOpen(!open)}
+                              className="sm:pointer-events-none"
+                            >
+                              <LockIcon size={14}/>
+                            </button>
+                            {/* <div  className='invisible group-hover:visible absolute right-0 top-0 pt-4.5 z-10'> */}
+                            <div className={`absolute right-0 top-0 pt-4.5 z-10 group-hover:visible ${open ? "visible" : ""}`}>
                               <div className='bg-white text-gray-600 text-xs rounded border border-gray-200 p-2 px-3'>
                                 {!listing.isCredentialSubmitted && (
                                   <>
@@ -219,6 +232,10 @@ const MyListing = () => {
                             </div>
 
                           </div>
+
+
+
+
                           {listing.status === "active" && (
                             <StarIcon
                             onClick={()=> markAsFeatured(listing.id)}
