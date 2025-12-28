@@ -86,22 +86,22 @@ const Navbar = () => {
                     ) : (
                         <UserButton>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='Marketplace' labelIcon={<GripIcon size={16} className="text-blue-500"/>} onClick={()=> navigate('marketplace')} />
+                                <UserButton.Action label='Marketplace' labelIcon={<GripIcon size={16} className="text-blue-500"/>} onClick={()=> {navigate('marketplace'); scrollTo(0,0)}} />
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='Messages' labelIcon={<MessageCircleMoreIcon size={16} className="text-indigo-500"/>} onClick={()=> navigate('messages')} />
+                                <UserButton.Action label='Messages' labelIcon={<MessageCircleMoreIcon size={16} className="text-indigo-500"/>} onClick={()=> {navigate('messages'); scrollTo(0,0)}} />
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='My Listing' labelIcon={<ListIcon size={16} className="text-purple-500"/>} onClick={()=> navigate('my-listings')} />
+                                <UserButton.Action label='My Listing' labelIcon={<ListIcon size={16} className="text-purple-500"/>} onClick={()=> {navigate('my-listings'); scrollTo(0,0)}} />
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='My Orders' labelIcon={<BoxIcon size={16} className="text-orange-500"/>} onClick={()=> navigate('my-orders')} />
+                                <UserButton.Action label='My Orders' labelIcon={<BoxIcon size={16} className="text-orange-500"/>} onClick={()=> {navigate('my-orders'); scrollTo(0,0)}} />
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
-                                <UserButton.Action label='Go Projects' labelIcon={<ExternalLinkIcon size={16} className='text-green-500' />} onClick={()=> navigate('projects')} />
+                                <UserButton.Action label='Go Projects' labelIcon={<ExternalLinkIcon size={16} className='text-green-500' />} onClick={()=> {navigate('projects'); scrollTo(0,0)}} />
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
-                               {isAdmin && <UserButton.Action label='Admin' labelIcon={<UserLockIcon size={16} className='text-cyan-500'/> } onClick={()=> navigate('/admin')} />}
+                               {isAdmin && <UserButton.Action label='Admin' labelIcon={<UserLockIcon size={16} className='text-cyan-500'/> } onClick={()=> {navigate('/admin'); scrollTo(0,0)}} />}
                             </UserButton.MenuItems>
                         </UserButton>
                     )}
