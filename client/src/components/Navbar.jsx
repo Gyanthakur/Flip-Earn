@@ -1,25 +1,59 @@
-import React, { use } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { assets } from '../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
-import { BoxIcon, ExternalLinkIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMoreIcon, XIcon } from 'lucide-react';
-import { useClerk, useUser, UserButton } from '@clerk/clerk-react';
+import { BoxIcon, ExternalLinkIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMoreIcon, UserLockIcon, XIcon } from 'lucide-react';
+import { useClerk, useUser, UserButton, useAuth } from '@clerk/clerk-react';
 import Logger from './Logger';
 
 import { ExternalLink } from "lucide-react";
+import axios from 'axios';
+import { backendUrl } from '../configs/axios';
+import toast from 'react-hot-toast';
 
 
 
  
 
 const Navbar = () => {
-    const {user} = useUser();
+    const admin = import.meta.env.VITE_ADMIN_EMAIL;
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const {getToken} = useAuth();
+    const {user, isLoaded} = useUser();
     const {openSignIn, openSignUp, openUserProfile} = useClerk();
     const [menuOpen, setMenuOpen] = React.useState(false);
     const navigate = useNavigate();
 
-      const openProjects = () => {
-    window.open("/projects", "_blank");
-  }
+    const openProjects = () => {
+        window.open("/projects", "_blank");
+    }
+    const fetchIsAdmin = async () => {
+        try {
+            const token = await getToken();
+            const {data} = await axios.get(`${backendUrl}/api/admin/isAdmin`, {headers: {Authorization: `Bearer ${token}`}});
+            setIsAdmin(data.isAdmin);
+        } catch (error) {
+            toast.error(error?.response?.data?.message || error.message);
+            console.log(error);
+        }finally{
+            setIsLoading(false)
+        }
+    };
+
+
+    useEffect(() => {
+    if (
+        isLoaded &&
+        admin &&
+        user?.primaryEmailAddress?.emailAddress === admin
+    ) {
+        fetchIsAdmin();
+    }
+    }, [isLoaded, user, admin]);
+
+
+  
+    
 
   return (
     <nav className='h-20'>
@@ -33,6 +67,7 @@ const Navbar = () => {
                         
                         <Link to={user ? '/messages' : "#"} onClick={() => user ? scrollTo(0, 0) : openSignIn()}> Messages </Link>
                         <Link to={user ? '/my-listings' : "#"} onClick={() =>  user ? scrollTo(0, 0) : openSignIn()}> My Listings </Link>
+
                         <Link
                             onClick={openProjects}
                             className="flex items-center gap-1 text-blue-600 hover:text-blue-700 hover:underline font-semibold"
@@ -64,6 +99,9 @@ const Navbar = () => {
                             </UserButton.MenuItems>
                             <UserButton.MenuItems>
                                 <UserButton.Action label='Go Projects' labelIcon={<ExternalLinkIcon size={16} className='text-green-500' />} onClick={()=> navigate('projects')} />
+                            </UserButton.MenuItems>
+                            <UserButton.MenuItems>
+                               {isAdmin && <UserButton.Action label='Admin' labelIcon={<UserLockIcon size={16} className='text-cyan-500'/> } onClick={()=> navigate('/admin')} />}
                             </UserButton.MenuItems>
                         </UserButton>
                     )}

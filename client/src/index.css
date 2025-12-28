@@ -12,6 +12,11 @@ button{
   display: none;
 }
 
+::-webkit-scrollbar{
+  display: none;
+}
+
+
 .cl-drawerRoot{
   z-index: 100;
 }
