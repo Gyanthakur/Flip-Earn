@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { Github, Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import Logger from "../Logger";
+import { assets } from "../../assets/assets";
 
 const AdminFooter = () => {
 	const [email, setEmail] = useState("");
@@ -21,12 +22,15 @@ const AdminFooter = () => {
 			<footer className="mt-24 px-6 md:px-16 lg:px-24 xl:px-32 w-full text-sm bg-slate-50 pt-10 border-t border-slate-200">
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
 					<div className="sm:col-span-2 lg:col-span-1">
-						<h1 className="text-2xl font-bold text-slate-900 mb-2">flipεarn</h1>
+                        <a href="/">
+                            <img src={assets.logo} alt="Logo" />
+                        </a>
 						<p className="text-sm/7 mt-6 text-slate-600">
 							Manage and monitor your social media marketplace. Oversee brands,
 							customers, and platform analytics with our comprehensive admin
 							dashboard.
 						</p>
+                        
 					</div>
 					<div className="flex flex-col lg:items-center lg:justify-center">
 						<div className="flex flex-col text-sm space-y-2.5">
@@ -126,7 +130,9 @@ const AdminFooter = () => {
 								>
 									<Mail size={20} />
 								</a>
+                                
 							</div>
+                            <img className='w-60 h-25 bg-transparent' src="/flipearnbygyan1.png" alt="Flip-Earn" />
 						</div>
 					</div>
 				</div>

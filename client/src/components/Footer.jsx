@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { assets } from '../assets/assets'
 import { toast } from 'react-toastify';
 import { Github, InstagramIcon, Linkedin, Mail, MessageCircleCode } from 'lucide-react';
+import Logger from './Logger';
 
 const Footer = () => {
 
@@ -27,8 +28,14 @@ const Footer = () => {
                         </a>
                         <p className="text-sm/7 mt-6">flipearn is a social media marketplace . We are the leading
                             social media marketplace that connects brands with their
-                            customers With our user-friendly interface.</p>
+                            customers With our user-friendly interface.
+                        </p>
+                        <img className='w-60 h-25 bg-transparent' src="/flipearnbygyan1.png" alt="Flip-Earn" />
+                            <div className="md:hidden lg:hidden flex items-center justify-center rounded-lg mt-4 gap-2 w-fit">
+                                 <Logger />
+                            </div>
                     </div>
+                    
                     <div className="flex flex-col lg:items-center lg:justify-center">
                         <div className="flex flex-col text-sm space-y-2.5">
                             <h2 className="font-semibold mb-5 text-gray-800">Company</h2>
