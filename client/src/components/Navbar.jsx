@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from 'react'
 import { assets } from '../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
-import { BoxIcon, ExternalLinkIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMoreIcon, UserLockIcon, XIcon } from 'lucide-react';
+import { BoxIcon, ExternalLinkIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMoreIcon, NotebookTabs, UserLockIcon, XIcon } from 'lucide-react';
 import { useClerk, useUser, UserButton, useAuth } from '@clerk/clerk-react';
 import Logger from './Logger';
 
@@ -67,6 +67,8 @@ const Navbar = () => {
                         
                         <Link to={user ? '/messages' : "#"} onClick={() => user ? scrollTo(0, 0) : openSignIn()}> Messages </Link>
                         <Link to={user ? '/my-listings' : "#"} onClick={() =>  user ? scrollTo(0, 0) : openSignIn()}> My Listings </Link>
+                        <Link to="/documentation" onClick={() => scrollTo(0, 0)} className='text-cyan-400'> Docs </Link>
+
 
                         <Link
                             onClick={openProjects}
@@ -103,6 +105,9 @@ const Navbar = () => {
                             <UserButton.MenuItems>
                                {isAdmin && <UserButton.Action label='Admin' labelIcon={<UserLockIcon size={16} className='text-cyan-500'/> } onClick={()=> {navigate('/admin'); scrollTo(0,0)}} />}
                             </UserButton.MenuItems>
+                            <UserButton.MenuItems>
+                                <UserButton.Action label='Docs' labelIcon={<NotebookTabs size={16} className='text-red-500' />} onClick={()=> {navigate('/documentation'); scrollTo(0,0)}}/>
+                            </UserButton.MenuItems>
                         </UserButton>
                     )}
 
@@ -116,6 +121,7 @@ const Navbar = () => {
                         <Link to="/marketplace" onClick={() => setMenuOpen(false)}> MarketPlace </Link>
                         <button onClick={openSignIn}>Messages</button>
                         <button onClick={openSignIn}>My Listings</button>
+                        <Link to="/documentation" onClick={() => setMenuOpen(false)} className='text-cyan-500'> Docs </Link>
                         <button onClick={openSignIn} className=' cursor-pointer px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full'>Login</button>
                         <button><Logger/></button>
                         <Link

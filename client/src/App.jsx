@@ -26,6 +26,8 @@ import { useEffect } from 'react'
 import {getAllPublicListing, getAllUserListing } from './app/features/listingSlice'
 import Footer from './components/Footer'
 import AdminFooter from './components/admin/AdminFooter'
+import DocumentationPage from './pages/DocumentationPage'
+import Documentation from './components/Documentation'
 
 const App = () => {
 
@@ -65,6 +67,8 @@ const App = () => {
         <Route path="/edit-listing/:id" element={<ManageListing />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/documentation" element={<DocumentationPage />} />
+        <Route path="/docs" element={<Documentation />} />
         <Route path="/loading/:nextUrl" element={<Loading />} />
         <Route path="/admin" element={<Layout/>}>
           <Route index element={<Dashboard/>}/>
