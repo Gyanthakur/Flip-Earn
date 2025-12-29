@@ -342,7 +342,7 @@ const sendNewCredentials = inngest.createFunction(
               <!-- Signature -->
               <div style="margin-top:40px;text-align:right;">
                 <img
-                  src="https://github.com/user-attachments/assets/235580a2-f10f-43b4-9309-fe6bf5f0d8e4"
+                  src="https://github-production-user-asset-6210df.s3.amazonaws.com/98226958/530779997-235580a2-f10f-43b4-9309-fe6bf5f0d8e4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251229%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251229T173815Z&X-Amz-Expires=300&X-Amz-Signature=814e1db1f9d1f8420cb4660f54fa921a8cddc4f02739a8dde9055dfeb4a06b56&X-Amz-SignedHeaders=host"
                   alt="Gyan Pratap Singh Signature"
                   style="width:180px;height:auto;object-fit:contain;"
                 />
