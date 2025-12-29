@@ -21,9 +21,9 @@ const Transactions = () => {
        try {
         const token = await getToken();
         const {data} = await axios.get(`${backendUrl}/api/admin/transactions`, {headers: {Authorization: `Bearer ${token}`}})
-        console.log("trans", data);
+        console.log("transaction", data.transactions);
         
-         setTransactions(data.trasactions);
+         setTransactions(data.transactions);
          setLoading(false);
        } catch (error) {
             toast.error(error?.response?.data?.message || error.message);
