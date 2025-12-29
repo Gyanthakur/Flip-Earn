@@ -206,7 +206,7 @@ const MyListing = () => {
 
 				{/* Balance Section */}
 
-				<div className="flex flex-col sm:flex-row justify-between gap-4 xl:gap-20 p-6  mb-10 bg-white rounded-xl border border-gray-200">
+				{/* <div className="flex flex-col sm:flex-row justify-between gap-4 xl:gap-20 p-6  mb-10 bg-white rounded-xl border border-gray-200">
 					{[
 						{ label: "Earned", value: balance.earned, icon: WalletIcon },
 						{
@@ -221,6 +221,39 @@ const MyListing = () => {
 								item.label === "Available" && setShowWithdrawal(true)
 							}
 							key={index}
+							className="flex flex-1 items-center justify-between p-4 rounded-lg border border-gray-100 cursor-pointer"
+						>
+							<div className="flex items-center gap-3">
+								<item.icon className="text-gray-500 w-6 h-6" />
+								<span className="font-medium text-gray-600">{item.label}</span>
+							</div>
+							<span className="text-xl font-medium text-gray-700">
+								{currency}
+								{item.value.toFixed(2)}
+							</span>
+						</div>
+					))}
+				</div> */}
+				{/* Balance Section */}
+				<div className="flex flex-col sm:flex-row justify-between gap-4 xl:gap-20 p-6 mb-10 bg-white rounded-xl border border-gray-200">
+					{[
+						{ label: "Earned", value: balance?.earned ?? 0, icon: WalletIcon },
+						{
+							label: "Withdrawn",
+							value: balance?.withdrawn ?? 0,
+							icon: ArrowDownCircleIcon,
+						},
+						{
+							label: "Available",
+							value: balance?.available ?? 0, // ✅ FIXED
+							icon: CoinsIcon,
+						},
+					].map((item, index) => (
+						<div
+							key={index}
+							onClick={() =>
+								item.label === "Available" && setShowWithdrawal(true)
+							}
 							className="flex flex-1 items-center justify-between p-4 rounded-lg border border-gray-100 cursor-pointer"
 						>
 							<div className="flex items-center gap-3">
