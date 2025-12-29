@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ListingCard from "../components/ListingCard";
 import FilterSidebar from "../components/FilterSidebar";
+import Signature from "./Signature";
 
 const MarketPlace = () => {
 	const [searchParams] = useSearchParams();
@@ -82,51 +83,54 @@ const MarketPlace = () => {
 	});
 
 	return (
-		<div className="px-6 md:px-16 lg:px-24 xl:px-32">
-			{/* Top Bar */}
-			<div className="flex items-center justify-between text-slate-500">
-				<button
-					onClick={() => {
-						navigate("/");
-						scrollTo(0, 0);
-					}}
-					className="flex items-center gap-2 py-5"
-				>
-					<ArrowLeftIcon className="size-4" />
-					Back to Home
-				</button>
+		<>
+			<div className="px-6 md:px-16 lg:px-24 xl:px-32">
+				{/* Top Bar */}
+				<div className="flex items-center justify-between text-slate-500">
+					<button
+						onClick={() => {
+							navigate("/");
+							scrollTo(0, 0);
+						}}
+						className="flex items-center gap-2 py-5"
+					>
+						<ArrowLeftIcon className="size-4" />
+						Back to Home
+					</button>
 
-				<button
-					onClick={() => setShowFilterPhone(true)}
-					className="flex items-center gap-2 py-5 sm:hidden"
-				>
-					<FilterIcon className="size-4" />
-					Filters
-				</button>
-			</div>
-
-			{/* Content */}
-			<div className="relative flex items-start gap-8 pb-8">
-				{/* ✅ FIXED FILTER SIDEBAR */}
-				<div className="hidden sm:block w-[280px] sticky top-20 self-start">
-					<FilterSidebar
-						setFilters={setFilters}
-						filters={filters}
-						setShowFilterPhone={setShowFilterPhone}
-						showFilterPhone={showFilterPhone}
-					/>
+					<button
+						onClick={() => setShowFilterPhone(true)}
+						className="flex items-center gap-2 py-5 sm:hidden"
+					>
+						<FilterIcon className="size-4" />
+						Filters
+					</button>
 				</div>
 
-				{/* Listings */}
-				<div className="flex-1 grid grid-cols-1 xl:grid-cols-2 gap-4">
-					{filteredListings
-						.sort((a, b) => (a.featured ? -1 : b.featured ? 1 : 0))
-						.map((listing, index) => (
-							<ListingCard listing={listing} key={index} />
-						))}
+				{/* Content */}
+				<div className="relative flex items-start gap-8 pb-8">
+					{/* ✅ FIXED FILTER SIDEBAR */}
+					<div className="hidden sm:block w-[280px] sticky top-20 self-start">
+						<FilterSidebar
+							setFilters={setFilters}
+							filters={filters}
+							setShowFilterPhone={setShowFilterPhone}
+							showFilterPhone={showFilterPhone}
+						/>
+					</div>
+
+					{/* Listings */}
+					<div className="flex-1 grid grid-cols-1 xl:grid-cols-2 gap-4">
+						{filteredListings
+							.sort((a, b) => (a.featured ? -1 : b.featured ? 1 : 0))
+							.map((listing, index) => (
+								<ListingCard listing={listing} key={index} />
+							))}
+					</div>
 				</div>
 			</div>
-		</div>
+			<Signature />
+		</>
 	);
 };
 
