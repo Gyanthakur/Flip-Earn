@@ -17,7 +17,9 @@ const WithdrawalDetail = ({ data, onClose }) => {
         try {
             toast.loading("Processing...");
             const token = await getToken();
-            const res = await axios.get(`${backendUrl}/api/admin/withdrawl-mark/${data.id}`,{}, {headers: {Authorization: `Bearer ${token}`}})
+            const res = await axios.put(`${backendUrl}/api/admin/withdrawl-mark/${data.id}`,{}, {headers: {Authorization: `Bearer ${token}`}})
+            console.log("mark withdrawal: ", res);
+            
             toast.dismissAll();
             toast.success(res.data.message);
             
