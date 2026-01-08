@@ -50,6 +50,14 @@ export const addListing = async(req,res) => {
                 ...accountDetails
             }
         })
+        /* 🔔 Emit Inngest event for email notifications */
+        await inngest.send({
+            name: "app/listing.created",
+            data: {
+                listingId: listing.id,
+            },
+        });
+        
         return res.status(201).json({message: "Account Listed successfully", listing});
 
     } catch (error) {

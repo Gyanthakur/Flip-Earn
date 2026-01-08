@@ -193,7 +193,7 @@ const sendPurchseEmail = inngest.createFunction(
                              <!-- Signature -->
                             <div style="margin-top:40px;text-align:right;">
                                 <img
-                                src="https://github-production-user-asset-6210df.s3.amazonaws.com/98226958/530779997-235580a2-f10f-43b4-9309-fe6bf5f0d8e4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251229%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251229T173815Z&X-Amz-Expires=300&X-Amz-Signature=814e1db1f9d1f8420cb4660f54fa921a8cddc4f02739a8dde9055dfeb4a06b56&X-Amz-SignedHeaders=host"
+                                src="https://private-user-images.githubusercontent.com/98226958/530554865-3124acc2-198b-4abe-9dc8-3e0b90e717a7.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4ODI5NTUsIm5iZiI6MTc2Nzg4MjY1NSwicGF0aCI6Ii85ODIyNjk1OC81MzA1NTQ4NjUtMzEyNGFjYzItMTk4Yi00YWJlLTlkYzgtM2UwYjkwZTcxN2E3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDE0MzA1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMxNWU4NGMyMDA1MTdiYTI3YzI5NmI1NWNhMmZjYmMxN2YzMDY4Y2FjNTZjYTExZWZhODk2Y2M5MTQxZDExMjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.2MPniEFoQyaOQLEv1OK6o1WUjrcB14LIk_ryjN66SpU"
                                 alt="Gyan Pratap Singh Signature"
                                 style="width:180px;height:auto;object-fit:contain;"
                                 />
@@ -346,7 +346,7 @@ const sendNewCredentials = inngest.createFunction(
                             <!-- Signature -->
                         <div style="margin-top:40px;text-align:right;">
                             <img
-                            src="https://github-production-user-asset-6210df.s3.amazonaws.com/98226958/530779997-235580a2-f10f-43b4-9309-fe6bf5f0d8e4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251229%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251229T173815Z&X-Amz-Expires=300&X-Amz-Signature=814e1db1f9d1f8420cb4660f54fa921a8cddc4f02739a8dde9055dfeb4a06b56&X-Amz-SignedHeaders=host"
+                            src="https://private-user-images.githubusercontent.com/98226958/530554865-3124acc2-198b-4abe-9dc8-3e0b90e717a7.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4ODI5NTUsIm5iZiI6MTc2Nzg4MjY1NSwicGF0aCI6Ii85ODIyNjk1OC81MzA1NTQ4NjUtMzEyNGFjYzItMTk4Yi00YWJlLTlkYzgtM2UwYjkwZTcxN2E3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDE0MzA1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMxNWU4NGMyMDA1MTdiYTI3YzI5NmI1NWNhMmZjYmMxN2YzMDY4Y2FjNTZjYTExZWZhODk2Y2M5MTQxZDExMjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.2MPniEFoQyaOQLEv1OK6o1WUjrcB14LIk_ryjN66SpU"
                             alt="Gyan Pratap Singh Signature"
                             style="width:180px;height:auto;object-fit:contain;"
                             />
@@ -377,6 +377,169 @@ const sendNewCredentials = inngest.createFunction(
 	}
 );
 
+
+const sendListingCreatedEmail = inngest.createFunction(
+  { id: "send-listing-created-email" },
+  { event: "app/listing.created" },
+  async ({ event }) => {
+    const { listingId } = event.data;
+
+    const listing = await prisma.listing.findFirst({
+      where: { id: listingId },
+      include: { owner: true },
+    });
+
+    if (!listing) return;
+
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+
+    /* ================= OWNER EMAIL ================= */
+    await sendEmail({
+      to: listing.owner.email,
+      subject: "✅ Your FlipEarn Listing Has Been Created",
+      html: `
+      <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center">
+              <table width="600" cellpadding="0" cellspacing="0"
+                style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+                <!-- Banner -->
+                <tr>
+                  <td style="background:linear-gradient(135deg,#4f46e5,#6366f1);padding:30px;text-align:center;">
+                    <h1 style="margin:0;color:#ffffff;font-size:28px;">FlipEarn</h1>
+                    <p style="margin:8px 0 0;color:#e0e7ff;font-size:14px;">
+                      Buy • Sell • Earn Securely
+                    </p>
+                  </td>
+                </tr>
+
+                <!-- Content -->
+                <tr>
+                  <td style="padding:30px;color:#1f2937;">
+                    <h2 style="margin-top:0;color:#111827;">🎉 Listing Created Successfully!</h2>
+
+                    <p style="font-size:15px;line-height:1.6;color:#374151;">
+                      Hi <strong>${listing.owner.name}</strong>,<br />
+                      Your listing has been successfully created on FlipEarn.
+                    </p>
+
+                    <!-- Listing Info -->
+                    <div style="margin:25px 0;padding:20px;background:#f9fafb;border-radius:10px;border:1px solid #e5e7eb;">
+                      <h3 style="margin-top:0;color:#4f46e5;">📄 Listing Details</h3>
+                      <p><strong>Title:</strong> ${listing.title}</p>
+                      <p><strong>Username:</strong> @${listing.username}</p>
+                      <p><strong>Platform:</strong> ${listing.platform}</p>
+                      <p><strong>Status:</strong>
+                        <span style="color:#f59e0b;font-weight:bold;">Pending Verification</span>
+                      </p>
+                    </div>
+
+                    <p style="font-size:14px;color:#4b5563;">
+                      Our admin team will review and verify your listing shortly.
+                    </p>
+
+                    <p style="margin-top:20px;">
+                      <a href="mailto:support@flipearn.com"
+                        style="display:inline-block;padding:12px 22px;background:#4f46e5;color:#ffffff;text-decoration:none;border-radius:999px;font-size:14px;">
+                        Contact Support
+                      </a>
+                    </p>
+
+                    <!-- Signature -->
+                    <div style="margin-top:40px;text-align:right;">
+                      <img
+                        src="https://private-user-images.githubusercontent.com/98226958/530554865-3124acc2-198b-4abe-9dc8-3e0b90e717a7.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4ODI5NTUsIm5iZiI6MTc2Nzg4MjY1NSwicGF0aCI6Ii85ODIyNjk1OC81MzA1NTQ4NjUtMzEyNGFjYzItMTk4Yi00YWJlLTlkYzgtM2UwYjkwZTcxN2E3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDE0MzA1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMxNWU4NGMyMDA1MTdiYTI3YzI5NmI1NWNhMmZjYmMxN2YzMDY4Y2FjNTZjYTExZWZhODk2Y2M5MTQxZDExMjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.2MPniEFoQyaOQLEv1OK6o1WUjrcB14LIk_ryjN66SpU"
+                        alt="Gyan Pratap Singh Signature"
+                        style="width:180px;height:auto;object-fit:contain;"
+                      />
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                  <td style="background:#f3f4f6;padding:20px;text-align:center;">
+                    <p style="margin:0;font-size:12px;color:#6b7280;">
+                      © ${new Date().getFullYear()} FlipEarn. All rights reserved.
+                    </p>
+                    <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                      Built with ❤️ by Gyan Pratap Singh
+                    </p>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+      `,
+    });
+
+    /* ================= ADMIN EMAIL ================= */
+    await sendEmail({
+      to: ADMIN_EMAIL,
+      subject: "🚨 New Listing Created on FlipEarn",
+      html: `
+      <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center">
+              <table width="600" cellpadding="0" cellspacing="0"
+                style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+
+                <!-- Banner -->
+                <tr>
+                  <td style="background:linear-gradient(135deg,#ef4444,#f97316);padding:30px;text-align:center;">
+                    <h1 style="margin:0;color:#ffffff;font-size:28px;">FlipEarn Admin</h1>
+                    <p style="margin:8px 0 0;color:#fee2e2;font-size:14px;">
+                      New Listing Alert
+                    </p>
+                  </td>
+                </tr>
+
+                <!-- Content -->
+                <tr>
+                  <td style="padding:30px;color:#1f2937;">
+                    <h2 style="margin-top:0;color:#111827;">🚨 New Listing Added</h2>
+
+                    <div style="margin:25px 0;padding:20px;background:#fef2f2;border-radius:10px;border:1px solid #fecaca;">
+                      <p><strong>Owner:</strong> ${listing.owner.name}</p>
+                      <p><strong>Email:</strong> ${listing.owner.email}</p>
+                      <p><strong>Title:</strong> ${listing.title}</p>
+                      <p><strong>Username:</strong> @${listing.username}</p>
+                      <p><strong>Platform:</strong> ${listing.platform}</p>
+                    </div>
+
+                    <p style="font-size:14px;color:#4b5563;">
+                      Please review and verify this listing from the admin dashboard.
+                    </p>
+                  </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                  <td style="background:#f3f4f6;padding:20px;text-align:center;">
+                    <p style="margin:0;font-size:12px;color:#6b7280;">
+                      © ${new Date().getFullYear()} FlipEarn Admin Panel
+                    </p>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+      `,
+    });
+  }
+);
+
+
+
 // Create an empty array where we'll export future Inngest functions
 export const functions = [
 	syncUserCreation,
@@ -384,4 +547,5 @@ export const functions = [
 	syncUserUpdation,
 	sendPurchseEmail,
 	sendNewCredentials,
+  sendListingCreatedEmail,
 ];
