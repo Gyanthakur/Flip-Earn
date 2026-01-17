@@ -479,7 +479,7 @@ const sendListingCreatedEmail = inngest.createFunction(
     });
 
     /* ================= ADMIN EMAIL ================= */
-    const LISTING_URL = `https://flip-earn-gps.vercel.app/listing?listingId=${listingId}`;
+    const LISTING_URL = `https://flip-earn-gps.vercel.app/listing/${listingId}`;
     await sendEmail({
       to: ADMIN_EMAIL,
       subject: "🚨 New Listing Created on FlipEarn",
@@ -523,15 +523,13 @@ const sendListingCreatedEmail = inngest.createFunction(
                   <div style="text-align:center;">
                     <a href="${LISTING_URL}"
                       style="display:inline-block;padding:14px 28px;
-                      background:#4f46e5;color:#ffffff;text-decoration:none;
+                      background:linear-gradient(135deg,#ef4444,#f97316);
+                      color:#ffffff;text-decoration:none;
                       border-radius:8px;font-size:14px;font-weight:600;">
                       See Listing
                     </a>
                   </div>
 
-                    // <p style="font-size:14px;color:#4b5563;">
-                    //   Please review and verify this listing from the admin dashboard.
-                    // </p>
                   </td>
                 </tr>
 
