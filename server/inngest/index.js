@@ -558,7 +558,7 @@ const sendCredentialSubmittedEmail = inngest.createFunction(
     if (!listing) return;
 
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-    const VERIFY_URL = process.env.ADMIN_DASHBOARD_URL;
+    const VERIFY_URL = `${process.env.ADMIN_DASHBOARD_URL}/admin/verify-credentials?listingId=${listingId}`;
 
     await sendEmail({
       to: ADMIN_EMAIL,
