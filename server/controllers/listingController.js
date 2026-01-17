@@ -293,6 +293,14 @@ export const addCredential = async(req,res) => {
             where: {id: listingId},
             data: {isCredentialSubmitted: true}
         })
+        
+        await inngest.send({
+        name: "app/credential.submitted",
+        data: {
+            listingId,
+        },
+        });
+
 
         return res.status(200).json({message: "Credential added successfully"});
 
