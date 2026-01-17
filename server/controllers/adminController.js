@@ -1,6 +1,7 @@
 // controller for checking if user is admin
 
 import prisma from "../configs/prisma.js";
+import { inngest } from "../inngest/index.js";
 
 export const isAdmin = async (req, res) => {
 	try {
@@ -197,6 +198,13 @@ export const changeCredential = async (req, res) => {
 			where: { id: listingId },
 			data: { isCredentialChanged: true },
 		});
+		await inngest.send({
+		name: "app/credential.changed",
+		data: {
+			listingId,
+		},
+		});
+
 
 		return res.json({ message: "Credential changed successfully" });
 	} catch (error) {

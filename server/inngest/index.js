@@ -36,7 +36,7 @@ const syncUserCreation = inngest.createFunction(
 				image: data?.image_url,
 			},
 		});
-	}
+	},
 );
 
 // Inngest function to delete user from database
@@ -70,7 +70,7 @@ const syncUserDeletion = inngest.createFunction(
 				data: { status: "inactive" },
 			});
 		}
-	}
+	},
 );
 
 // inngest function to update user data in database
@@ -88,7 +88,7 @@ const syncUserUpdation = inngest.createFunction(
 				image: data?.image_url,
 			},
 		});
-	}
+	},
 );
 
 // Inngest function to send purchase email to the customer
@@ -107,19 +107,6 @@ const sendPurchseEmail = inngest.createFunction(
 			where: { listingId: transaction.listingId },
 		});
 
-		// await sendEmail({
-		//     to:customer.email,
-		//     subject: "Your Credential for the account you purchased",
-		//     html: `
-		//     <h2>Thank you for purchasing acoount @${listing.username} of ${listing.platform} platform </h2>
-		//     <p>Here are your credentials for thre listing you purchased.</p>
-		//     <h3>New Credentials</h3>
-		//     <div>
-		//     ${credential.updatedCredential.map((cred)=> `<p>${cred.name} : ${cred.value} </p>`).join("")}
-		//     </div>
-		//     <p>If you have any question, please contact us at <a href="mailto:gps.96169@gmail.com">support@flipearn.com</a></p>
-		//     `
-		// })
 		await sendEmail({
 			to: customer.email,
 			subject: "🎉 Your FlipEarn Account Credentials Are Ready!",
@@ -174,7 +161,7 @@ const sendPurchseEmail = inngest.createFunction(
                                     <strong>${cred.name}:</strong>
                                     <span style="color:#374151;">${cred.value}</span>
                                 </p>
-                                `
+                                `,
 															)
 															.join("")}
                             </div>
@@ -193,7 +180,7 @@ const sendPurchseEmail = inngest.createFunction(
                              <!-- Signature -->
                             <div style="margin-top:40px;text-align:right;">
                                 <img
-                                src="https://private-user-images.githubusercontent.com/98226958/530554865-3124acc2-198b-4abe-9dc8-3e0b90e717a7.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4ODI5NTUsIm5iZiI6MTc2Nzg4MjY1NSwicGF0aCI6Ii85ODIyNjk1OC81MzA1NTQ4NjUtMzEyNGFjYzItMTk4Yi00YWJlLTlkYzgtM2UwYjkwZTcxN2E3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDE0MzA1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMxNWU4NGMyMDA1MTdiYTI3YzI5NmI1NWNhMmZjYmMxN2YzMDY4Y2FjNTZjYTExZWZhODk2Y2M5MTQxZDExMjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.2MPniEFoQyaOQLEv1OK6o1WUjrcB14LIk_ryjN66SpU"
+                                src="https://ik.imagekit.io/gpsimage/gps.png"
                                 alt="Gyan Pratap Singh Signature"
                                 style="width:180px;height:auto;object-fit:contain;"
                                 />
@@ -220,7 +207,7 @@ const sendPurchseEmail = inngest.createFunction(
             </div>
             `,
 		});
-	}
+	},
 );
 
 // inngest function to send new credential for deleted listings
@@ -234,32 +221,6 @@ const sendNewCredentials = inngest.createFunction(
 			where: { listingId },
 		});
 		if (newCredential) {
-			// await sendEmail({
-			//     to: listing.owner.email,
-			//     subject: "New Credentials for your deleted listing",
-			//     html: `
-
-			//     h2
-			//     <h2>Your new credentials for your deleted listing :</h2>
-			//     title : ${listing.title}
-			//     <br />
-			//     username : ${listing.username}
-			//     <br />
-			//     platfoem : ${listing.platform}
-			//     <br />
-			//     <h3>new credentials</h3>
-			//     <div>
-			//     ${newCredential.updatedCredential.map((cred)=> `<p>${cred.name} : ${cred.value} </p>`).join("")}
-			//     </div>
-
-			//     <h3>Old Credentials</h3>
-			//      <div>
-			//     ${newCredential.originalCredential.map((cred)=> `<p>${cred.name} : ${cred.value} </p>`).join("")}
-			//     </div>
-
-			//      <p>If you have any question, please contact us at <a href="mailto:gps.96169@gmail.com">support@flipearn.com</a></p>
-			//     `
-			// })
 			await sendEmail({
 				to: listing.owner.email,
 				subject: "🔔 New Credentials for Your Deleted FlipEarn Listing",
@@ -314,7 +275,7 @@ const sendNewCredentials = inngest.createFunction(
                                 <p style="margin:8px 0;font-size:14px;color:#0f172a;">
                                     <strong>${cred.name}:</strong> ${cred.value}
                                 </p>
-                                `
+                                `,
 															)
 															.join("")}
                             </div>
@@ -328,7 +289,7 @@ const sendNewCredentials = inngest.createFunction(
                                 <p style="margin:8px 0;font-size:14px;color:#1f2937;">
                                     <strong>${cred.name}:</strong> ${cred.value}
                                 </p>
-                                `
+                                `,
 															)
 															.join("")}
                             </div>
@@ -374,30 +335,29 @@ const sendNewCredentials = inngest.createFunction(
             `,
 			});
 		}
-	}
+	},
 );
 
-
 const sendListingCreatedEmail = inngest.createFunction(
-  { id: "send-listing-created-email" },
-  { event: "app/listing.created" },
-  async ({ event }) => {
-    const { listingId } = event.data;
+	{ id: "send-listing-created-email" },
+	{ event: "app/listing.created" },
+	async ({ event }) => {
+		const { listingId } = event.data;
 
-    const listing = await prisma.listing.findFirst({
-      where: { id: listingId },
-      include: { owner: true },
-    });
+		const listing = await prisma.listing.findFirst({
+			where: { id: listingId },
+			include: { owner: true },
+		});
 
-    if (!listing) return;
+		if (!listing) return;
 
-    const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+		const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
-    /* ================= OWNER EMAIL ================= */
-    await sendEmail({
-      to: listing.owner.email,
-      subject: "✅ Your FlipEarn Listing Has Been Created",
-      html: `
+		/* ================= OWNER EMAIL ================= */
+		await sendEmail({
+			to: listing.owner.email,
+			subject: "✅ Your FlipEarn Listing Has Been Created",
+			html: `
       <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
@@ -450,7 +410,7 @@ const sendListingCreatedEmail = inngest.createFunction(
                     <!-- Signature -->
                     <div style="margin-top:40px;text-align:right;">
                       <img
-                        src="https://private-user-images.githubusercontent.com/98226958/530554865-3124acc2-198b-4abe-9dc8-3e0b90e717a7.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4ODI5NTUsIm5iZiI6MTc2Nzg4MjY1NSwicGF0aCI6Ii85ODIyNjk1OC81MzA1NTQ4NjUtMzEyNGFjYzItMTk4Yi00YWJlLTlkYzgtM2UwYjkwZTcxN2E3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDE0MzA1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMxNWU4NGMyMDA1MTdiYTI3YzI5NmI1NWNhMmZjYmMxN2YzMDY4Y2FjNTZjYTExZWZhODk2Y2M5MTQxZDExMjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.2MPniEFoQyaOQLEv1OK6o1WUjrcB14LIk_ryjN66SpU"
+                        src="https://ik.imagekit.io/gpsimage/gps.png"
                         alt="Gyan Pratap Singh Signature"
                         style="width:180px;height:auto;object-fit:contain;"
                       />
@@ -476,14 +436,14 @@ const sendListingCreatedEmail = inngest.createFunction(
         </table>
       </div>
       `,
-    });
+		});
 
-    /* ================= ADMIN EMAIL ================= */
-    const LISTING_URL = `https://flip-earn-gps.vercel.app/listing/${listingId}`;
-    await sendEmail({
-      to: ADMIN_EMAIL,
-      subject: "🚨 New Listing Created on FlipEarn",
-      html: `
+		/* ================= ADMIN EMAIL ================= */
+		const LISTING_URL = `https://flip-earn-gps.vercel.app/listing/${listingId}`;
+		await sendEmail({
+			to: ADMIN_EMAIL,
+			subject: "🚨 New Listing Created on FlipEarn",
+			html: `
       <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
@@ -548,6 +508,9 @@ const sendListingCreatedEmail = inngest.createFunction(
                     <p style="margin:0;font-size:12px;color:#6b7280;">
                       © ${new Date().getFullYear()} FlipEarn Admin Panel
                     </p>
+                    <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                            Built with ❤️ by Gyan Pratap Singh
+                    </p>
                   </td>
                 </tr>
 
@@ -557,36 +520,33 @@ const sendListingCreatedEmail = inngest.createFunction(
         </table>
       </div>
       `,
-    });
-  }
+		});
+	},
 );
-
-
-
 
 // mail to the admin when user submitted credentials
 const sendCredentialSubmittedEmail = inngest.createFunction(
-  { id: "send-credential-submitted-email" },
-  { event: "app/credential.submitted" },
-  async ({ event }) => {
-    const { listingId } = event.data;
+	{ id: "send-credential-submitted-email" },
+	{ event: "app/credential.submitted" },
+	async ({ event }) => {
+		const { listingId } = event.data;
 
-    const listing = await prisma.listing.findFirst({
-      where: { id: listingId },
-      include: {
-        owner: true,
-      },
-    });
+		const listing = await prisma.listing.findFirst({
+			where: { id: listingId },
+			include: {
+				owner: true,
+			},
+		});
 
-    if (!listing) return;
+		if (!listing) return;
 
-    const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-    const VERIFY_URL = `${process.env.ADMIN_DASHBOARD_URL}/admin/verify-credentials?listingId=${listingId}`;
+		const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+		const VERIFY_URL = `${process.env.ADMIN_DASHBOARD_URL}/admin/verify-credentials?listingId=${listingId}`;
 
-    await sendEmail({
-      to: ADMIN_EMAIL,
-      subject: "🔐 Credentials Submitted – Verification Required",
-      html: `
+		await sendEmail({
+			to: ADMIN_EMAIL,
+			subject: "🔐 Credentials Submitted – Verification Required",
+			html: `
       <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
@@ -657,6 +617,9 @@ const sendCredentialSubmittedEmail = inngest.createFunction(
                     <p style="margin:0;font-size:12px;color:#6b7280;">
                       © ${new Date().getFullYear()} FlipEarn Admin Panel
                     </p>
+                    <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                            Built with ❤️ by Gyan Pratap Singh
+                    </p>
                   </td>
                 </tr>
 
@@ -666,10 +629,176 @@ const sendCredentialSubmittedEmail = inngest.createFunction(
         </table>
       </div>
       `,
-    });
-  }
+		});
+	},
 );
 
+
+// # 3. If Admin changes credentials then mail to the owner
+// # 4. Notification if Admin changed the credentials then all users get mail that to new listings is available for selling or purchase this account 
+
+
+
+export const sendCredentialChangedEmail = inngest.createFunction(
+  { id: "send-credential-changed-email" },
+  { event: "app/credential.changed" },
+  async ({ event }) => {
+    const { listingId } = event.data;
+
+    const listing = await prisma.listing.findFirst({
+      where: { id: listingId },
+      include: {
+        owner: true,
+      },
+    });
+
+    if (!listing) return;
+
+    const users = await prisma.user.findMany({
+      where: {
+        id: {
+          not: listing.ownerId,
+        },
+      },
+      select: { email: true },
+    });
+
+    const LISTING_URL = `https://flip-earn-gps.vercel.app/listing/${listing.id}`;
+    
+
+    /* ================= OWNER EMAIL ================= */
+    await sendEmail({
+      to: listing.owner.email,
+      subject: "✅ Credentials Updated by Admin",
+      html: `
+      <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
+        <table width="100%">
+          <tr>
+            <td align="center">
+              <table width="600" style="background:#ffffff;border-radius:12px;overflow:hidden;">
+                
+                <tr>
+                  <td style="background:linear-gradient(135deg,#22c55e,#16a34a);padding:30px;text-align:center;">
+                    <h1 style="color:#ffffff;margin:0;">FlipEarn</h1>
+                    <p style="color:#dcfce7;margin:6px 0 0;">Credentials Updated</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="padding:30px;color:#1f2937;">
+                    <h2>Hi ${listing.owner.name},</h2>
+
+                    <p>
+                      The admin team has <strong>successfully updated the credentials</strong>
+                      for your listing <strong>@${listing.username}</strong>.
+                    </p>
+
+                    <div style="margin:20px 0;padding:16px;background:#f0fdf4;border-radius:8px;">
+                      <p><strong>Platform:</strong> ${listing.platform}</p>
+                      <p><strong>Status:</strong> Ready for sale</p>
+                    </div>
+
+                    <p>
+                      Your listing is now active and visible to buyers.
+                    </p>
+
+                    <a href="${LISTING_URL}"
+                      style="display:inline-block;margin-top:20px;padding:12px 22px;
+                      background:#22c55e;color:#ffffff;text-decoration:none;border-radius:999px;">
+                      View Listing
+                    </a>
+
+                    <div style="margin-top:40px;text-align:right;">
+                      <img src="https://ik.imagekit.io/gpsimage/gps.png" style="width:160px;" />
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="background:#f3f4f6;padding:16px;text-align:center;font-size:12px;color:#6b7280;">
+                    © ${new Date().getFullYear()} FlipEarn
+                  </td>
+                  <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                            Built with ❤️ by Gyan Pratap Singh
+                  </p>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+      `,
+    });
+
+    /* ================= USERS EMAIL ================= */
+    if (users.length > 0) {
+      await sendEmail({
+        to: users.map((u) => u.email),
+        subject: "🔥 New Verified Account Available on FlipEarn",
+        html: `
+        <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
+          <table width="100%">
+            <tr>
+              <td align="center">
+                <table width="600" style="background:#ffffff;border-radius:12px;overflow:hidden;">
+                  
+                  <tr>
+                    <td style="background:linear-gradient(135deg,#4f46e5,#6366f1);
+                      padding:30px;text-align:center;">
+                      <h1 style="color:#ffffff;margin:0;">New Listing Alert 🚀</h1>
+                      <p style="color:#e0e7ff;margin-top:6px;">
+                        Verified account ready for purchase
+                      </p>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="padding:30px;color:#1f2937;">
+                      <h2>@${listing.username}</h2>
+
+                      <div style="margin:20px 0;padding:18px;background:#eef2ff;border-radius:10px;">
+                        <p><strong>Platform:</strong> ${listing.platform}</p>
+                        <p><strong>Category:</strong> ${listing.niche}</p>
+                      </div>
+
+                      <p>
+                        A newly verified account is now available for
+                        <strong>purchase or resale</strong> on FlipEarn.
+                      </p>
+
+                      <a href="${LISTING_URL}"
+                        style="display:inline-block;margin-top:20px;
+                        padding:14px 26px;background:#4f46e5;
+                        color:#ffffff;text-decoration:none;border-radius:999px;">
+                        View & Buy Now
+                      </a>
+
+                      <div style="margin-top:40px;text-align:right;">
+                        <img src="https://ik.imagekit.io/gpsimage/gps.png" style="width:160px;" />
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="background:#f3f4f6;padding:16px;text-align:center;font-size:12px;color:#6b7280;">
+                      © ${new Date().getFullYear()} FlipEarn · Buy • Sell • Earn
+                    </td>
+                    <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                            Built with ❤️ by Gyan Pratap Singh
+                    </p>
+                  </tr>
+
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+        `,
+      });
+    }
+  }
+);
 
 
 
@@ -680,6 +809,7 @@ export const functions = [
 	syncUserUpdation,
 	sendPurchseEmail,
 	sendNewCredentials,
-  sendListingCreatedEmail,
-  sendCredentialSubmittedEmail,
+	sendListingCreatedEmail,
+	sendCredentialSubmittedEmail,
+  sendCredentialChangedEmail,
 ];
