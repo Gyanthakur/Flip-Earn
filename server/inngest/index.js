@@ -343,10 +343,10 @@ const sendNewCredentials = inngest.createFunction(
                                 Contact FlipEarn Support
                             </a>
                             </p>
-                            <!-- Signature -->
+                       <!-- Signature -->
                         <div style="margin-top:40px;text-align:right;">
                             <img
-                            src="https://private-user-images.githubusercontent.com/98226958/530554865-3124acc2-198b-4abe-9dc8-3e0b90e717a7.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc4ODI5NTUsIm5iZiI6MTc2Nzg4MjY1NSwicGF0aCI6Ii85ODIyNjk1OC81MzA1NTQ4NjUtMzEyNGFjYzItMTk4Yi00YWJlLTlkYzgtM2UwYjkwZTcxN2E3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTA4VDE0MzA1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMxNWU4NGMyMDA1MTdiYTI3YzI5NmI1NWNhMmZjYmMxN2YzMDY4Y2FjNTZjYTExZWZhODk2Y2M5MTQxZDExMjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.2MPniEFoQyaOQLEv1OK6o1WUjrcB14LIk_ryjN66SpU"
+                            src="https://ik.imagekit.io/gpsimage/gps.png"
                             alt="Gyan Pratap Singh Signature"
                             style="width:180px;height:auto;object-fit:contain;"
                             />
@@ -530,6 +530,15 @@ const sendListingCreatedEmail = inngest.createFunction(
                     </a>
                   </div>
 
+                  <!-- Signature -->
+                        <div style="margin-top:40px;text-align:right;">
+                            <img
+                            src="https://ik.imagekit.io/gpsimage/gps.png"
+                            alt="Gyan Pratap Singh Signature"
+                            style="width:180px;height:auto;object-fit:contain;"
+                            />
+                        </div>
+
                   </td>
                 </tr>
 
@@ -630,6 +639,15 @@ const sendCredentialSubmittedEmail = inngest.createFunction(
                     <p style="font-size:13px;color:#6b7280;text-align:center;">
                       Please ensure credentials are valid before approving.
                     </p>
+
+                    <!-- Signature -->
+                        <div style="margin-top:40px;text-align:right;">
+                            <img
+                            src="https://ik.imagekit.io/gpsimage/gps.png"
+                            alt="Gyan Pratap Singh Signature"
+                            style="width:180px;height:auto;object-fit:contain;"
+                            />
+                        </div>
                   </td>
                 </tr>
 
