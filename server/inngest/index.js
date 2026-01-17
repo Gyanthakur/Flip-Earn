@@ -190,11 +190,11 @@ const sendPurchseEmail = inngest.createFunction(
 
                         <!-- Footer -->
                         <tr>
-                        <td style="background:#f3f4f6;padding:20px;text-align:center;">
-                            <p style="margin:0;font-size:12px;color:#6b7280;">
+                        <td style="background:#492828;padding:20px;text-align:center;">
+                            <p style="margin:0;font-size:12px;color:#FDF6E3;">
                             © ${new Date().getFullYear()} FlipEarn. All rights reserved.
                             </p>
-                            <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                            <p style="margin:6px 0 0;font-size:12px;color:#FDF6E3;">
                             Built with ❤️ by Gyan Pratap Singh
                             </p>
                         </td>
@@ -317,11 +317,11 @@ const sendNewCredentials = inngest.createFunction(
 
                         <!-- Footer -->
                         <tr>
-                        <td style="background:#f3f4f6;padding:20px;text-align:center;">
-                            <p style="margin:0;font-size:12px;color:#6b7280;">
+                        <td style="background:#492828;padding:20px;text-align:center;">
+                            <p style="margin:0;font-size:12px;color:#FDF6E3;">
                             © ${new Date().getFullYear()} FlipEarn. All rights reserved.
                             </p>
-                            <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                            <p style="margin:6px 0 0;font-size:12px;color:#FDF6E3;">
                             Built with ❤️ by Gyan Pratap Singh
                             </p>
                         </td>
@@ -420,11 +420,11 @@ const sendListingCreatedEmail = inngest.createFunction(
 
                 <!-- Footer -->
                 <tr>
-                  <td style="background:#f3f4f6;padding:20px;text-align:center;">
-                    <p style="margin:0;font-size:12px;color:#6b7280;">
+                  <td style="background:#492828;padding:20px;text-align:center;">
+                    <p style="margin:0;font-size:12px;color:#FDF6E3;">
                       © ${new Date().getFullYear()} FlipEarn. All rights reserved.
                     </p>
-                    <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                    <p style="margin:6px 0 0;font-size:12px;color:#FDF6E3;">
                       Built with ❤️ by Gyan Pratap Singh
                     </p>
                   </td>
@@ -504,11 +504,11 @@ const sendListingCreatedEmail = inngest.createFunction(
 
                 <!-- Footer -->
                 <tr>
-                  <td style="background:#f3f4f6;padding:20px;text-align:center;">
-                    <p style="margin:0;font-size:12px;color:#6b7280;">
+                  <td style="background:#492828;padding:20px;text-align:center;">
+                    <p style="margin:0;font-size:12px;color:#FDF6E3;">
                       © ${new Date().getFullYear()} FlipEarn Admin Panel
                     </p>
-                    <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                    <p style="margin:6px 0 0;font-size:12px;color:#FDF6E3;">
                             Built with ❤️ by Gyan Pratap Singh
                     </p>
                   </td>
@@ -613,11 +613,11 @@ const sendCredentialSubmittedEmail = inngest.createFunction(
 
                 <!-- Footer -->
                 <tr>
-                  <td style="background:#f3f4f6;padding:20px;text-align:center;">
-                    <p style="margin:0;font-size:12px;color:#6b7280;">
+                  <td style="background:#492828;padding:20px;text-align:center;">
+                    <p style="margin:0;font-size:12px;color:#FDF6E3;">
                       © ${new Date().getFullYear()} FlipEarn Admin Panel
                     </p>
-                    <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                    <p style="margin:6px 0 0;font-size:12px;color:#FDF6E3;">
                             Built with ❤️ by Gyan Pratap Singh
                     </p>
                   </td>
