@@ -715,10 +715,10 @@ export const sendCredentialChangedEmail = inngest.createFunction(
                 </tr>
 
                 <tr>
-                  <td style="background:#492828;padding:16px;text-align:center;font-size:12px;color:#6b7280;">
+                  <td style="background:#492828;padding:16px;text-align:center;font-size:12px;color:#FDF6E3;">
                     © ${new Date().getFullYear()} FlipEarn | All rights reserved.
                     <br />
-                    <span style="display:inline-block;margin-top:6px;font-size:12px;color:#6b7280;">
+                    <span style="display:inline-block;margin-top:6px;font-size:12px;color:#FDF6E3;">
                       Built with ❤️ by Gyan Pratap Singh
                     </span>
                   </td>
@@ -783,10 +783,10 @@ export const sendCredentialChangedEmail = inngest.createFunction(
                   </tr>
 
                   <tr>
-                    <td style="background:#492828;padding:16px;text-align:center;font-size:12px;color:#6b7280;">
+                    <td style="background:#492828;padding:16px;text-align:center;font-size:12px;color:#FDF6E3;">
                       © ${new Date().getFullYear()} FlipEarn · Buy • Sell • Earn | All rights reserved.
                       <br />
-                      <span style="display:inline-block;margin-top:6px;font-size:12px;color:#6b7280;">
+                      <span style="display:inline-block;margin-top:6px;font-size:12px;color:#FDF6E3;">
                         Built with ❤️ by Gyan Pratap Singh
                       </span>
                     </td>
