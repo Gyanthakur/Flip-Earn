@@ -716,11 +716,11 @@ export const sendCredentialChangedEmail = inngest.createFunction(
 
                 <tr>
                   <td style="background:#f3f4f6;padding:16px;text-align:center;font-size:12px;color:#6b7280;">
-                    © ${new Date().getFullYear()} FlipEarn
-                  </td>
-                  <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
-                            Built with ❤️ by Gyan Pratap Singh
-                  </p>
+                    © ${new Date().getFullYear()} FlipEarn | All rights reserved.
+                      <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                      Built with ❤️ by Gyan Pratap Singh
+                      </p>
+                    </td>
                 </tr>
 
               </table>
@@ -782,11 +782,11 @@ export const sendCredentialChangedEmail = inngest.createFunction(
 
                   <tr>
                     <td style="background:#f3f4f6;padding:16px;text-align:center;font-size:12px;color:#6b7280;">
-                      © ${new Date().getFullYear()} FlipEarn · Buy • Sell • Earn
+                      © ${new Date().getFullYear()} FlipEarn · Buy • Sell • Earn | All rights reserved.
+                      <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
+                              Built with ❤️ by Gyan Pratap Singh
+                      </p>
                     </td>
-                    <p style="margin:6px 0 0;font-size:12px;color:#6b7280;">
-                            Built with ❤️ by Gyan Pratap Singh
-                    </p>
                   </tr>
 
                 </table>
