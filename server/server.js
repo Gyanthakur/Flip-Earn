@@ -13,9 +13,19 @@ const app = express();
 
 app.use('/api/stripe', express.raw({type: 'application/json'}), stripeWebhook)
 
+app.use(
+  cors({
+    origin: [
+      "https://flip-earn-gps.vercel.app", // frontend
+      "http://localhost:3000",            // local dev
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+// app.use(cors());
 app.use(clerkMiddleware());
 
 
