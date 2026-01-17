@@ -529,9 +529,9 @@ const sendListingCreatedEmail = inngest.createFunction(
                     </a>
                   </div>
 
-                    <p style="font-size:14px;color:#4b5563;">
-                      Please review and verify this listing from the admin dashboard.
-                    </p>
+                    // <p style="font-size:14px;color:#4b5563;">
+                    //   Please review and verify this listing from the admin dashboard.
+                    // </p>
                   </td>
                 </tr>
 
