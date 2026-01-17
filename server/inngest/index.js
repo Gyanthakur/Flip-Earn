@@ -479,6 +479,8 @@ const sendListingCreatedEmail = inngest.createFunction(
     });
 
     /* ================= ADMIN EMAIL ================= */
+    const LISTING_URL = `${process.env.FRONTEND_URL}/listing?listingId=${listingId}`;
+    // const VERIFY_URL = `${process.env.ADMIN_DASHBOARD_URL}/admin/verify-credentials?listingId=${listingId}`;
     await sendEmail({
       to: ADMIN_EMAIL,
       subject: "🚨 New Listing Created on FlipEarn",
@@ -513,9 +515,28 @@ const sendListingCreatedEmail = inngest.createFunction(
                       <p><strong>Platform:</strong> ${listing.platform}</p>
                     </div>
 
-                    <p style="font-size:14px;color:#4b5563;">
-                      Please review and verify this listing from the admin dashboard.
-                    </p>
+                    
+
+
+
+                  <p style="font-size:14px;color:#4b5563;margin-bottom:25px;">
+                   New Listing added, Please review and verify this listing from the admin dashboard.
+                  </p>
+
+                  <!-- Verify Button -->
+                  <div style="text-align:center;">
+                    <a href="${LISTING_URL}"
+                      style="display:inline-block;padding:14px 28px;
+                      background:#4f46e5;color:#ffffff;text-decoration:none;
+                      border-radius:8px;font-size:14px;font-weight:600;">
+                      See Listing
+                    </a>
+                  </div>
+
+
+
+
+                    
                   </td>
                 </tr>
 
