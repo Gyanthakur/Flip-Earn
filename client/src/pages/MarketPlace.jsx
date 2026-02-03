@@ -22,30 +22,6 @@ const MarketPlace = () => {
 
 	const { listings } = useSelector((state) => state.listing);
 
-	// const filteredListings = listings.filter((listing) =>{
-
-	//   if(filters.plateform && filters.plateform.length > 0){
-	//     if(!filters.plateform.includes(listing.platform)) return false;
-	//   }
-
-	//   if(filters.maxPrice){
-	//     if(listing.price > filters.maxPrice) return false;
-	//   }
-
-	//   if(filters.minFollowers){
-	//     if(listing.followers_count < filters.minFollowers) return false;
-	//   }
-
-	//   if(filters.niche && filters.niche.length > 0){
-	//     if(!filters.niche.includes(listing.niche)) return false;
-	//   }
-
-	//   if(filters.Verified && listing.verified !== filters.Verified) return false;
-	//   if(filters.monetized && listing.monetized !== filters.monetized) return false;
-
-	//   return true;
-	// });
-
 	const filteredListings = listings.filter((listing) => {
 		if (filters.platform && filters.platform.length > 0) {
 			if (!filters.platform.includes(listing.platform)) return false;
@@ -110,14 +86,12 @@ const MarketPlace = () => {
 				{/* Content */}
 				<div className="relative flex items-start gap-8 pb-8">
 					{/* ✅ FIXED FILTER SIDEBAR */}
-					<div className="hidden sm:block w-[280px] sticky top-20 self-start">
-						<FilterSidebar
-							setFilters={setFilters}
-							filters={filters}
-							setShowFilterPhone={setShowFilterPhone}
-							showFilterPhone={showFilterPhone}
-						/>
-					</div>
+					<FilterSidebar
+						setFilters={setFilters}
+						filters={filters}
+						setShowFilterPhone={setShowFilterPhone}
+						showFilterPhone={showFilterPhone}
+					/>
 
 					{/* Listings */}
 					<div className="flex-1 grid grid-cols-1 xl:grid-cols-2 gap-4">
