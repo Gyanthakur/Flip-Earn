@@ -128,7 +128,7 @@ const niches = [
 
         const token = await getToken();
 
-        // const {data} = await axios.put(`http://localhost:3000/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
+      
         const {data} = await axios.put(`${backendUrl}/api/listing`, formDataInstance, {headers: {Authorization: `Bearer ${token}`}})
 
         toast.dismissAll();
